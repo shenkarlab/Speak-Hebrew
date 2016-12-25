@@ -16,6 +16,7 @@ app.use(function (req,res,next) {
 
 /*
  @param url - url string to web site
+ @param documentObjectModel (in query param)
  @param userId - user id
  @return json:
  result:"ok"/'fail',

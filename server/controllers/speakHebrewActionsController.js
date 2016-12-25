@@ -6,11 +6,19 @@ var globalStatisticsSchema = require('./../db/globalStatisticsSchema');
 var DB = require('./../db/database');
 var conf =  require('./../config.json');
 var preprocessingController = require('./preprocessingController');
+var textualLogicController = require('./textualLogicController');
 var errorStr = "An server error occurred.Error code:";
+var dictionary;
 
-exports.getUrlHebrewWords = function(req,res) { //todo
-    var url = req.params.url;
-    var userId = req.params.userId;
+exports.getUrlHebrewWords = function(req,res) {
+    var documentObjectModel =  req.query.documentObjectModel;
+    if(documentObjectModel === undefined){
+        returnResponse(res,400,false,"DOM object not send");
+    }
+    else{
+        console.log(documentObjectModel);
+        var userId = req.params.userId;
+        var url = req.params.url;
         var query = urlsSchema.findOne().where({
             url:url
         });
@@ -21,11 +29,13 @@ exports.getUrlHebrewWords = function(req,res) { //todo
             }
             else{
                 var isNewUrl = (doc === null);
-                var result = getHebrewWords(url);
+                var result = textualLogicController.getTranslatableWords(documentObjectModel,dictionary);
                 updateStatistics(userId,url,isNewUrl,result);
                 returnResponse(res,200,true,result);
             }
         });
+    }
+
 };
 
 exports.userClickedOnTranslatedWord = function(req,res) { //todo
@@ -56,22 +66,6 @@ exports.getAllUserSwitchedTranslatedWords = function(req,res) {//todo
     var numberOfWords = req.params.numberOfWords;
     returnResponse(res, 200, true, "ok");
 };
-
-function getHebrewWords(url) {  //todo
-    var resultData = [];
-    //temporary hardcodet result for testing
-        resultData.push({
-            word: "קוֹנְסְפִּירַצְיָה",
-            translation: ["קֶשֶׁר"],
-            explanation: "קשר הוא התארגנות חשאית של אנשים במטרה למרוד בשלטון או לבצע מזימה נגד השלטון."
-        });
-        resultData.push({
-            word: "קוֹנְפוֹרְמִיזְם",
-            translation: ["הֲלִיכָה בַּתֶּלֶ,","תּוֹאֲמָנוּת"],
-            explanation: null
-        });
-    return resultData;
-}
 
 function updateStatistics(userId,url,isNewUrl,result){
     if(true === isNewUrl){
@@ -172,6 +166,22 @@ function preprocessingMode(){
     },5000);
 }
 
+function getDictionaryFromDb(){ // get data from DB and calculate map
+    if(!DB.isConnectedToDB()){
+        dictionary = undefined;
+        console.error("No connected to db. Can't get dictionary!")
+    }
+    wordsSchema.find({},function (err,data) {
+        if(err){
+            console.log(err);
+            res.status(500).send(errorStr+"0");
+        }
+        dictionary = data;
+        console.log("Dictionary OK.")
+    });
+}
+
+
 function returnResponse(res,status,isSuccessful,data){
     if(isSuccessful){
         res.status(200).send({
@@ -190,3 +200,25 @@ function returnResponse(res,status,isSuccessful,data){
 if (conf.preprocessingMode) {
     preprocessingMode();
 }
+
+setTimeout(function () {    //wait for mongoose connection established
+    console.log("Load dictionary....");
+    var count = 1;
+    console.log('Attempt number  '+count);
+    getDictionaryFromDb();
+    setTimeout(function () {    //wait for get data from mongo db + calculate map
+        if (dictionary !== undefined) {
+            console.log('Server ready to work.');
+            return;
+        }
+        var intervalObject = setInterval(function () {  // try again if attempt fail
+            getDictionaryFromDb();
+            count++;
+            console.log('Attempt number  ' + count);
+            if (dictionary !== undefined) {
+                console.log('Server ready to work.');
+                clearInterval(intervalObject);
+            }
+        },10000);
+    },3000);
+},3000);
