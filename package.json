@@ -1,0 +1,23 @@
+{
+  "name": "speak-hebrew",
+  "version": "1.0.0",
+  "description": "Shenkar Design & Engineering Lab project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://DimaGirya@github.com/shenkarlab/Speak-Hebrew.git"
+  },
+  "author": "Dima Girya,Dariya Dadov,Or Amit,Roy Waks",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shenkarlab/Speak-Hebrew/issues"
+  },
+  "homepage": "https://github.com/shenkarlab/Speak-Hebrew#readme",
+  "dependencies": {
+    "express": "4.*.*",
+    "mongoose": "4.*.*"
+  }
+}
