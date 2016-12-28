@@ -4,14 +4,14 @@ exports.getTranslatableWords = function(documentObjectModel,dictionary){
     var resultData = [];
     //temporary hardcodet result for testing
     resultData.push({
-        word: "קוֹנְסְפִּירַצְיָה",
-        translation: ["קֶשֶׁר"],
-        explanation: "קשר הוא התארגנות חשאית של אנשים במטרה למרוד בשלטון או לבצע מזימה נגד השלטון."
+        word: "אימפוטנצייה",
+        translation: ["אין-אונות"],
+        explanation: null
     });
     resultData.push({
-        word: "קוֹנְפוֹרְמִיזְם",
-        translation: ["הֲלִיכָה בַּתֶּלֶ","תּוֹאֲמָנוּת"],
-        explanation: null
+        word: "אינדיקציה",
+        translation: ["אות","הוריה","ציון"],
+        explanation: "אפשר להשתמש גם בחלופות 'סימן', 'עדות'."
     });
     return resultData;
 };
