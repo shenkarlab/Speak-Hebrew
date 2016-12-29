@@ -18,6 +18,7 @@
   "homepage": "https://github.com/shenkarlab/Speak-Hebrew#readme",
   "dependencies": {
     "express": "4.*.*",
+    "jsdom": "9.*.*",
     "mongoose": "4.*.*"
   }
 }

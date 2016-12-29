@@ -11,14 +11,8 @@ var errorStr = "An server error occurred.Error code:";
 var dictionary;
 
 exports.getUrlHebrewWords = function(req,res) {
-    var documentObjectModel =  req.query.documentObjectModel;
-    if(documentObjectModel === undefined){
-        returnResponse(res,400,false,"DOM object not send");
-    }
-    else{
-        console.log(documentObjectModel);
         var userId = req.params.userId;
-        var url = req.params.url;
+        var url = req.query.url;
         var query = urlsSchema.findOne().where({
             url:url
         });
@@ -29,13 +23,11 @@ exports.getUrlHebrewWords = function(req,res) {
             }
             else{
                 var isNewUrl = (doc === null);
-                var result = textualLogicController.getTranslatableWords(documentObjectModel,dictionary);
+                var result = textualLogicController.getTranslatableWords(url,dictionary);
                 updateStatistics(userId,url,isNewUrl,result);
                 returnResponse(res,200,true,result);
             }
         });
-    }
-
 };
 
 exports.userClickedOnTranslatedWord = function(req,res) { //todo
@@ -195,6 +187,8 @@ function returnResponse(res,status,isSuccessful,data){
             error:data
         });
     }
+    console.info("Response status:"+status+" Successful:"+isSuccessful + " Data:");
+    console.info(data);
 }
 
 if (conf.preprocessingMode) {
