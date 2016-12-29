@@ -29,7 +29,43 @@ exports.getTranslatableWords = function(url,dictionary){
                 });
                 console.log("Hebrew words find:"+hebrewWords.length);
                 console.log("-----------------------------------");
+
+                var jsonObj = dictionary;
+                console.log(jsonObj[2]);
+               // console.log(jsonObj[2].words[0]);
+                var shareInfoLen = Object.keys(jsonObj).length;
+                console.log("Size of origen JSON file is: " + shareInfoLen);
+                //console.log(hebrewWords[0]);
+                console.log("-----------------------");
+                console.log(hebrewWords[0]);
+                console.log(jsonObj[0].words[0].word);
+                console.log("-----------------------");
+                for(i = 0; i < hebrewWords.length; i++) {
+                      for(j=0; j< shareInfoLen; j++){
+                         if(hebrewWords[i] == jsonObj[j].words[0].word){
+
+                         // console.log("Article:    " +hebrewWords[i]);
+                         // console.log("Dictionary:    " +jsonObj[j].words[0].word );
+                         // console.log("Explanation:     "+ jsonObj[j].explanation);
+                         console.log("Found:" + jsonObj[j].words[0].word +"   ======>   "+ "Changing to:" + jsonObj[j].words_translation[0].word);
+                //          //  console.log("****************************************" +'\n')
+                //          //  var changedWord = ({ word_hebrew: jsonObj[j].word_hebrew, explanation: jsonObj[j].explanation });
+                //          // // console.log(changedJson);
+                //          //  changedJson[jsonObj[j].word] = changedWord ;
+                //         //  console.log(changedJson);
+                      }
+                       else{
+
+                //       // console.log("continue....");
+                         continue;
+                       }
+                //     //   JSON.stringify(changedJson); 
+                //     // console.log(changedJson);
+                    }
+                     }
+
             }
+
         });
 
     var resultData = [];
