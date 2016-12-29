@@ -1,5 +1,8 @@
 console.log("back.js file EXE!");
 
+var pageUrl=window.location.href;
+console.log('url is'+pageUrl);
+
 //static local words for testing
 // var wordsToreplace1=[
 //     {   "latin":"ג'קוזי",
@@ -15,6 +18,8 @@ console.log("back.js file EXE!");
 //         "hebrew":"change!!"
 //     }
 // ];
+
+
 
 var wordsToreplace2;
 
@@ -36,21 +41,24 @@ var user;
 function  switchWords(){
     console.log("switchWords(). the user is"+user);
     var myHtml=document.body.innerHTML;
+    var docBudy=document.body;
+    var myHtml2=docBudy.textContent || docBudy.innerText;
+
+
     var wordToSearch;
     var wordToSearchReg;
     var newWord;
-
-    console.log("---------------------");
-    console.log(myHtml);
-    console.log("---------------------");
 
 
 
             var serverResponse;
             var myXMLhttpReq=new XMLHttpRequest(),
             method = "GET",
-            url="https://speak-hebrew-lab-project.herokuapp.com/getUrlHebrewWords/pageUrl/oramit88@gmail.com?documentObjectModel="+myHtml;
-            //to test the console.log with or amit server, change url to:
+            url="https://speak-hebrew-lab-project.herokuapp.com/getUrlHebrewWords/oramit88@gmail.com?url="+pageUrl;
+                //url="localhost:3000/getUrlHebrewWords/pageUrl/oramit88@gmail.com?documentObjectModel="+myHtml;
+
+
+                //to test the console.log with or amit server, change url to:
             //url="https://circlews.herokuapp.com/getAllCategories";
 
             //dima
@@ -104,6 +112,7 @@ function  switchWords(){
                     }
                     else{
                         console.log("Error on responce");
+                        console.log(serverResponse);
                     }
                 }
             };
