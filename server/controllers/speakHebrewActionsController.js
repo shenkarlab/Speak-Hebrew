@@ -29,6 +29,14 @@ exports.getUrlHebrewWords = function(req,res) {
             }
         });
 };
+exports.getNumberOfChangedWords = function (req,res) {
+    var userId = req.params.userId;
+    var number = Math.floor((Math.random() * 100) + 1);
+    var data = {
+        numberOfChangedWord:number
+    };
+    returnResponse(res, 200, true, data);
+};
 
 exports.userClickedOnTranslatedWord = function(req,res) { //todo
     var word = req.params.word;

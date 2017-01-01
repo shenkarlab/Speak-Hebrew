@@ -27,6 +27,7 @@ app.use(function (req,res,next) {
         explanation - string
  */
 app.get('/getUrlHebrewWords/:userId',speakHebrewAction.getUrlHebrewWords);
+app.get('/getNumberOfChangedWords/:userId',speakHebrewAction.getNumberOfChangedWords);
 app.get('/userClickedOnWord/:word/:userId',speakHebrewAction.userClickedOnTranslatedWord);
 app.get('/getUserSwitchedTranslatedWords/:userId/:numberOfWords',speakHebrewAction.getUserSwitchedTranslatedWords);
 app.get('/getUserClickedTranslatedWords/:userId/:numberOfWords',speakHebrewAction.getUserClickedTranslatedWords);
