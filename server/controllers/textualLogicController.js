@@ -23,50 +23,44 @@ exports.getTranslatableWords = function(url,dictionary){
                 var resultArray = result.split(" ");
                 var hebrewWords = [];
                 resultArray.forEach(function (str) {
-                    if(str.length > 0){
+                    if(str.length > 0 && hebrewWords.indexOf(str) === -1){
                         hebrewWords.push(str);
                     }
                 });
-                console.log("Hebrew words find:"+hebrewWords.length);
+                console.log("Hebrew words found:"+hebrewWords.length);
                 console.log("-----------------------------------");
 
                 var jsonObj = dictionary;
-                console.log(jsonObj[2]);
-               // console.log(jsonObj[2].words[0]);
+                var changedJson = {
+        
+                 };
+
                 var shareInfoLen = Object.keys(jsonObj).length;
                 console.log("Size of origen JSON file is: " + shareInfoLen);
-                //console.log(hebrewWords[0]);
-                console.log("-----------------------");
-                console.log(hebrewWords[0]);
-                console.log(jsonObj[0].words[0].word);
-                console.log("-----------------------");
+
                 for(i = 0; i < hebrewWords.length; i++) {
                       for(j=0; j< shareInfoLen; j++){
                          if(hebrewWords[i] == jsonObj[j].words[0].word){
+                            var translationWord = [];
+                            jsonObj[j].words_translation.forEach(function (word) {
+                            translationWord.push(word.word);  
+                          });
 
-                         // console.log("Article:    " +hebrewWords[i]);
-                         // console.log("Dictionary:    " +jsonObj[j].words[0].word );
-                         // console.log("Explanation:     "+ jsonObj[j].explanation);
-                         console.log("Found:" + jsonObj[j].words[0].word +"   ======>   "+ "Changing to:" + jsonObj[j].words_translation[0].word);
-                //          //  console.log("****************************************" +'\n')
-                //          //  var changedWord = ({ word_hebrew: jsonObj[j].word_hebrew, explanation: jsonObj[j].explanation });
-                //          // // console.log(changedJson);
-                //          //  changedJson[jsonObj[j].word] = changedWord ;
-                //         //  console.log(changedJson);
+                            var changedWord = ({ word_hebrew: translationWord, explanation: jsonObj[j].explanation });
+                            changedJson[hebrewWords[i]] = changedWord ;
                       }
                        else{
-
-                //       // console.log("continue....");
                          continue;
                        }
-                //     //   JSON.stringify(changedJson); 
-                //     // console.log(changedJson);
                     }
-                     }
-
+                }
             }
+            JSON.stringify(changedJson); 
+            console.log(changedJson);
 
         });
+
+
 
     var resultData = [];
     //temporary hardcodet result for testing
@@ -81,4 +75,6 @@ exports.getTranslatableWords = function(url,dictionary){
         explanation: "אפשר להשתמש גם בחלופות 'סימן', 'עדות'."
     });
     return resultData;
+    
+
 };
