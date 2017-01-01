@@ -32,6 +32,7 @@ function getWordsArray(str) {
     str = str.replace(',',';');
     str = clearFromBrackets(str,"]","[");
     str = clearFromBrackets(str,")","(");
+    str = str.replace(',',";");
     var strArray = str.split(";");
     var wordArray = [];
     strArray.forEach(function (word){
