@@ -15,5 +15,3 @@ exports.returnResponse = function(res,status,isSuccessful,data){
         console.info(data);
     }
 };
-
-

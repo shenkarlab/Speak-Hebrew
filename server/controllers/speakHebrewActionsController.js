@@ -20,7 +20,7 @@ exports.getUrlHebrewWords = function(req,res) {
         query.exec(function (err,doc) {
             if(err) {
                 console.log(err);
-                returnResponse(res,500,false,error)
+                utilitiesController.returnResponse(res,500,false,err)
             }
             else{
                 var isNewUrl = (doc === null);
@@ -28,31 +28,10 @@ exports.getUrlHebrewWords = function(req,res) {
             }
         });
 };
-exports.getNumberOfChangedWords = function (req,res) {
-    var userId = req.params.userId;
-    var number = Math.floor((Math.random() * 100) + 1);
-    var data = {
-        numberOfChangedWord:number
-    };
-    utilitiesController.returnResponse(res, 200, true, data);
-};
 
-exports.userClickedOnTranslatedWord = function(req,res) { //todo
+exports.userClickedOnTranslatedWord = function(req,res) {
     var word = req.params.word;
-    var userId = req.params.userId;
-    updateClickedStatistics(word,userId);
-    utilitiesController.returnResponse(res, 200, true, "ok");
-};
-
-exports.getUserSwitchedTranslatedWords = function(req,res) { //todo
-    var userId = req.params.userId;
-    var numberOfWords = req.params.numberOfWords;
-    utilitiesController.returnResponse(res, 200, true, "ok");
-};
-
-exports.getUserClickedTranslatedWords = function(req,res) { //todo
-    var userId = req.params.userId;
-    var numberOfWords = req.params.numberOfWords;
+    statisticsController.updateClickedStatistics(word);
     utilitiesController.returnResponse(res, 200, true, "ok");
 };
 

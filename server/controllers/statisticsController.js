@@ -1,16 +1,6 @@
 'use strict';
-var mongoose = require('mongoose');
-var DB = require('./../db/database');
 var urlsSchema = require('./../db/urlsSchema');
 var globalStatisticsSchema = require('./../db/globalStatisticsSchema');
-
-exports.createUrlInDb = function (url) {
-    var urlObject = new urlsSchema(
-        {
-            url:url
-        });
-    urlObject.save();
-};
 
 exports.updateStatistics = function(url,isNewUrl,result){
     if(true === isNewUrl){
@@ -19,6 +9,26 @@ exports.updateStatistics = function(url,isNewUrl,result){
     result.forEach(function (word) {
         if(isNewUrl){
             updateGlobalStatisticsForWord(word);
+        }
+    });
+};
+
+exports.updateClickedStatistics = function(word){
+    var query  = globalStatisticsSchema.findOne().where({
+        word:word.word
+    });
+    query.exec(function (err,doc) {
+        if(err){
+            console.log(err);
+        }
+        else{
+            if(doc){
+                doc.clickCount =  doc.clickCount +1;
+                doc.save();
+            }
+            else{
+                console.error("Error! No such doc to update click statistic. Word is a:"+word);
+            }
         }
     });
 };
@@ -42,10 +52,13 @@ function updateGlobalStatisticsForWord(word){
     });
 }
 
-exports.updateClickedStatistics = function(word,userId){
-    updateGlobalClickStatistics(word);
-    updateUserClickStatistics(word,userId)
-};
+function createUrlInDb(url) {
+    var urlObject = new urlsSchema(
+        {
+            url:url
+        });
+    urlObject.save();
+}
 
 function incrementCountForStatisticDoc(doc){
     doc.translationCount =  doc.translationCount +1;
@@ -62,34 +75,3 @@ function createStatisticDocForWord(word){
         });
     globalStatisticObject.save();
 }
-
-function updateUserStatisticsForWord(userId,word){
-
-}
-
-
-function updateGlobalClickStatistics(word){
-    var query  = globalStatisticsSchema.findOne().where({
-        word:word.word
-    });
-    query.exec(function (err,doc) {
-        if(err){
-            console.log(err);
-        }
-        else{
-            if(doc){
-                doc.clickCount =  doc.clickCount +1;
-                doc.save();
-            }
-            else{
-                console.error("Error! No such doc to update click statistic. Word is a:"+word);
-            }
-        }
-    });
-}
-
-function updateUserClickStatistics(word,userId){
-
-}
-
-

@@ -26,11 +26,8 @@ app.use(function (req,res,next) {
         translation -  array of string
         explanation - string
  */
-app.get('/getUrlHebrewWords/:userId',speakHebrewAction.getUrlHebrewWords);
-app.get('/getNumberOfChangedWords/:userId',speakHebrewAction.getNumberOfChangedWords);
-app.get('/userClickedOnWord/:word/:userId',speakHebrewAction.userClickedOnTranslatedWord);
-app.get('/getUserSwitchedTranslatedWords/:userId/:numberOfWords',speakHebrewAction.getUserSwitchedTranslatedWords);
-app.get('/getUserClickedTranslatedWords/:userId/:numberOfWords',speakHebrewAction.getUserClickedTranslatedWords);
+app.get('/getUrlHebrewWords',speakHebrewAction.getUrlHebrewWords);
+app.get('/userClickedOnTranslatedWord/:word',speakHebrewAction.userClickedOnTranslatedWord);
 app.get('/getAllUsersClickedTranslatedWords/:numberOfWords',speakHebrewAction.getAllUsersClickedTranslatedWords);
 app.get('/getAllUserSwitchedTranslatedWords/:numberOfWords',speakHebrewAction.getAllUserSwitchedTranslatedWords);
 
