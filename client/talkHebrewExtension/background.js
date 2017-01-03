@@ -13,7 +13,7 @@
 //         "hebrew":"change!!"
 //     }
 // ];
-
+var userClickStatistic = null;
 
 console.log("back.js file EXE!");
 var enableAutoReplaceWordsBool;
@@ -82,10 +82,10 @@ function setClickebleFuncionToAllElements(){
         latinWordsArray[i].addEventListener('click', function(){
             //console.log("num of children "+this.childNodes.length);
             this.childNodes[1].classList.toggle('show');
+            userClickOnWord(this.childNodes[1].childNodes[0].innerHTML,this.childNodes[1].childNodes[1].innerHTML);
         });
     }
 }
-
 
 
 var user;
@@ -189,8 +189,80 @@ function checkConnectedUser(){
                 }
             });
 }
-//checkConnectedUser();
 
+function userClickOnWord(hebrewWord,latinWord){
+    console.log("userClickOnWord");
+    var statisticArrayLength =  userClickStatistic.length;
+    var isFind = false;
+    for(var i = 0;i < statisticArrayLength; i++){
+        if(userClickStatistic[i].latinWord === latinWord){
+            if(userClickStatistic[i].hebrewWord === hebrewWord){
+                isFind = true;
+                userClickStatistic[i].clicked++;
+            }
+        }
+    }
+    if(!isFind){
+        userClickStatistic.push({
+            latinWord:latinWord,
+            hebrewWord:hebrewWord,
+            clicked:1
+        });
+    }
+
+    chrome.storage.local.set({ "userClickStatistic": userClickStatistic }, function(){
+        console.log("Statistic saved");
+    });
+
+    chrome.storage.local.get(["userClickStatistic"], function(items){
+        console.log("Statistik:");
+        if(items.userClickStatistic === undefined){
+            console.log("undefined");
+        }
+        else{
+            console.log(userClickStatistic)
+        }
+    });
+    getUserClickStatistic(2);
+}
+
+function loadStatisticOnStart() {
+    chrome.storage.local.get(["userClickStatistic"], function(items){
+        console.log("items");
+        console.log(items);
+        if(items.userClickStatistic === undefined){
+            userClickStatistic = [];
+        }
+        else{
+            userClickStatistic = items.userClickStatistic;
+        }
+    })
+}
+
+function getUserClickStatistic(numberOfWords) {
+    var result;
+    userClickStatistic = sortByKey(userClickStatistic);
+    if(userClickStatistic.length <=  numberOfWords){
+        result = userClickStatistic;
+    }
+    else{
+        result = [];
+        var userClickStatisticLength = userClickStatistic.length;
+        for(var i = 0; i < numberOfWords;i++){
+            result[i] = userClickStatistic[userClickStatisticLength - i - 1];
+        }
+    }
+    console.log("result:");
+    console.log(result);
+    return result;
+}
+
+function sortByKey(array, key) {
+    return array.sort(function(a, b) {
+        var x = a[key]; var y = b[key];
+        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+    });
+}
 
 function cheackAutoReplaceSettings(){
     console.log("back.js checking AutoReplaceSettings");
@@ -207,4 +279,4 @@ function cheackAutoReplaceSettings(){
     });
 }
 cheackAutoReplaceSettings();
-
+loadStatisticOnStart();
