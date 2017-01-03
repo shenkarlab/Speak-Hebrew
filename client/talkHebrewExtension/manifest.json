@@ -9,14 +9,15 @@
       "matches": [
         "<all_urls>"
       ],
+      "css": ["includes/style.css"],
       "js": ["background.js"
       ]
     }
   ],
   "browser_action":{
     "default_title":"talk hebrew",
-    "default_icon":"icon.png",
-    "default_popup": "popup.html"
+    "default_icon":"includes/icon16.png",
+    "default_popup": "popupPage.html"
   },
   "permissions":[
     "activeTab",
