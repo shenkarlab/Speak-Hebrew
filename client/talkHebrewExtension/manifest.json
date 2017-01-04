@@ -6,11 +6,13 @@
   "options_page": "options.html",
   "content_scripts": [
     {
+      "run_at": "document_end",
       "matches": [
         "<all_urls>"
       ],
-      "css": ["includes/style.css"],
       "js": ["background.js"
+      ],
+      "css":["includes/style.css"
       ]
     }
   ],

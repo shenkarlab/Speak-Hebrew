@@ -7,7 +7,7 @@ var currenntUserSpan_element=document.getElementsByClassName("currentUser")[0];
 var enableAutoReplaceWordsBool;
 
 function cheackAutoReplaceSettings(){
-    console.log("cheacking AutoReplaceSettings");
+    console.log("checking AutoReplaceSettings");
     var autoSwap=document.getElementById("automaticallySwap");
     chrome.storage.local.get(["enableAutoReplaceWords"], function(items){
         enableAutoReplaceWordsBool=items.enableAutoReplaceWords;
@@ -111,3 +111,14 @@ document.getElementById("automaticallySwap").addEventListener("click", function(
         //this.style.color="#ffffff";
     }
 });
+
+
+
+
+
+document.getElementById("turnOfOnThisPage").addEventListener("click", function(){
+
+});
+
+
+

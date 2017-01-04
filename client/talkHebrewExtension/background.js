@@ -91,6 +91,9 @@ function setClickebleFuncionToAllElements(){
 var user;
 function  switchWords(){
     console.log("back.js: switchWords(). the user is"+user);
+    console.log("url is: ");
+    console.log(pageUrl);
+
     var myHtml=document.body.innerHTML; //the current html
 
     var wordToSearch;   //the latin word in the page.
@@ -105,32 +108,33 @@ function  switchWords(){
     var myXMLhttpReq=new XMLHttpRequest(),
     method = "GET",
     url="https://speak-hebrew-lab-project.herokuapp.com/getUrlHebrewWords?url="+pageUrl;
-            //url="localhost:3000/getUrlHebrewWords/pageUrl/oramit88@gmail.com?documentObjectModel="+myHtml;
-            //to test the console.log with or amit server, change url to:
-            //url="https://circlews.herokuapp.com/getAllCategories";
-            console.log("testttttt:");
+
             console.log(url);
             myXMLhttpReq.open(method, url, true);
             myXMLhttpReq.onreadystatechange = function() {
                 if (myXMLhttpReq.readyState == XMLHttpRequest.DONE) {
-                    console.log("Response is: ");
-                    console.log(serverResponse);
+
+                    //console.log(serverResponse);
                     serverResponse=JSON.parse(myXMLhttpReq.responseText);
                     if(serverResponse.result==="ok"){
-                        //console.log(serverResponse.data);
-                         wordsToreplace2=serverResponse.data;
+                        console.log("Response is: ");
+                        console.log(serverResponse.data);
+                        wordsToreplace2=serverResponse.data;
+                        console.log("printing the latin words: ");
 
-                         var numOfWordsToSwich=wordsToreplace2.length;
-                         for(var i=0;i<numOfWordsToSwich;i++){
+                        var numOfWordsToSwich=wordsToreplace2.length;
+                        console.log("***printing the  words in the page: ***");
+                        for(var i=0;i<numOfWordsToSwich;i++){
 
                              wordToSearch=wordsToreplace2[i].word; //the latin word
-                             //console.log("the latin word: "+wordToSearch);
+                             console.log("the latin word: "+wordToSearch);
 
                              //create regular expression
                              wordToSearchReg = new RegExp(wordToSearch, "g");
 
                              //get the hebrew word
                              hebrewWord=wordsToreplace2[i].translation[0];//the hebrew word
+                             console.log("the hebrew word: "+hebrewWord);
 
                              //get thr explanation
                              explanation=wordsToreplace2[i].explanation;
@@ -270,13 +274,23 @@ function cheackAutoReplaceSettings(){
         enableAutoReplaceWordsBool=items.enableAutoReplaceWords;
         console.log("back.js-enableAutoReplaceWordsBool is: "+enableAutoReplaceWordsBool);
         if(enableAutoReplaceWordsBool==true){
-            //if (document.readyState === 'complete') {
-                console.log("document ready!");
-                console.log("start processing..");
-                switchWords();
-            //}
+            // if (document.readyState == 'complete') {
+                 switchWords();
+            // }
         }
+
     });
 }
+
 cheackAutoReplaceSettings();
 loadStatisticOnStart();
+
+
+// window.addEventListener ("load", myMain, false);
+//
+// function myMain (evt) {
+//     console.log("************ document ready! ************");
+//     console.log("start processing..");
+//     cheackAutoReplaceSettings();
+//     loadStatisticOnStart();
+// }

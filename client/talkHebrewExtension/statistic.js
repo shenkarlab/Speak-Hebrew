@@ -26,7 +26,7 @@ var statArr=[
 window.onload = function () {
     CanvasJS.addColorSet("redBars",
         [//colorSet Array
-            "#FF0000",
+            "#e73739",
         ]);
     var chart = new CanvasJS.Chart("chartContainer",
         {
