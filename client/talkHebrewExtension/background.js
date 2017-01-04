@@ -1,3 +1,7 @@
+/*this js file runs on the background- the main purpose is to send requast
+ to the server, get the relevant words to the page, and switch them*/
+console.log("back.js file EXE!");
+
 //static local words for testing
 // var wordsToreplace1=[
 //     {   "latin":"ג'קוזי",
@@ -13,189 +17,153 @@
 //         "hebrew":"change!!"
 //     }
 // ];
-var userClickStatistic = null;
 
-console.log("back.js file EXE!");
-var enableAutoReplaceWordsBool;
+var userClickStatistic = null; //will hold the user pressed words statistics.
+
+var enableAutoReplaceWordsBool //if true- replace the latin words
 var pageUrl=window.location.href;
-console.log('url is'+pageUrl);
 
-
-
-
-
+/*save the current number of words that were replaces in the locally in chrome cash
+(present the numbers in extension menu= popupPge.html)*/
 function updateNumberOfWordsThatAutoReplace(numOfWords){
     var totalUserAmounth;
+
+    /*updating the numner of words that were switched on the current page*/
     console.log("the number of words in the page to save is: "+numOfWords);
     chrome.storage.local.set({ "numOfAutoReplaceWordsInPage": numOfWords }, function(){
         console.log("saved in storage. number of words is:"+numOfWords);
-
     });
 
+    /*updating the totla numner of words that were switched until now*/
     chrome.storage.local.get(["totalNumberOfUserWords"], function(items){
         totalUserAmounth=items.totalNumberOfUserWords;
-        if(totalUserAmounth==undefined){
-            console.log("total isnt deined");
+        if(totalUserAmounth==undefined){ //first time the user use the extension.
             totalUserAmounth=numOfWords;
             chrome.storage.local.set({ "totalNumberOfUserWords": totalUserAmounth }, function(){
                 console.log("total amounth saved: "+totalUserAmounth);
-
             });
-
         }
-        else{
-            console.log("total is defined");
+        else{//adding the current page amount of replacements to the total user replacements number.
             totalUserAmounth+=numOfWords;
             chrome.storage.local.set({ "totalNumberOfUserWords": totalUserAmounth }, function(){
                 console.log("total amounth is is:"+totalUserAmounth);
-
             });
-
         }
-        //document.getElementById("numberOfWordsInPage").innerHTML=numOfWords+" ";
-
-        // talkUser=items.talkHebrewUser;
-        // if(talkUser==undefined){
-        //     currenntUserSpan_element.innerHTML="לא מוגדר משתמש";
-        //
-        // }
-        // else {
-        //     currenntUserSpan_element.innerHTML="שלום: "+talkUser;
-        // }
     });
-
 }
 
+
+/*making the current replacements words clickable, and define the relevant function*/
 function setClickebleFuncionToAllElements(){
     console.log("back.js: setClickebleFuncionToAllElements");
     var latinWordsArray = document.getElementsByClassName('latinWords');
-    //var myPoUpArr=document.getElementsByClassName('popuptext');
-    // onClick's logic below:
-    console.log("number of words that was swicheddddd:" +latinWordsArray.length);
-    //console.log("number of popUps:" +myPoUpArr.length);
+    console.log("number of words that was switched:" +((latinWordsArray.length)/2));
 
     var latinWordsAmounth=latinWordsArray.length;
     updateNumberOfWordsThatAutoReplace(latinWordsAmounth/2);
 
     var i;
+    //adding event listener "click" to all the words-  to show popUp when user clicks on a word.
     for(i=0;i<latinWordsAmounth;i++){
         latinWordsArray[i].addEventListener('click', function(){
             //console.log("num of children "+this.childNodes.length);
+
+            //show the popUp near the relevant word with translation and explanation
             this.childNodes[1].classList.toggle('show');
+            //update word click statistic
             userClickOnWord(this.childNodes[1].childNodes[0].innerHTML,this.childNodes[1].childNodes[1].innerHTML);
         });
     }
 }
 
 
-var user;
+/*the main function that switch the latin word in the html page to the relevant hebrew word*/
 function  switchWords(){
-    console.log("back.js: switchWords(). the user is"+user);
-    console.log("url is: ");
-    console.log(pageUrl);
+    console.log("back.js: switchWords().");
+    //console.log("url is: ");
+    //console.log(pageUrl);
 
-    var myHtml=document.body.innerHTML; //the current html
+    var myHtml=document.body.innerHTML; //get the current html
 
     var wordToSearch;   //the latin word in the page.
-    var wordToSearchReg;//the latin word in the page in regular expression.
-    var hebrewWord;     //the hebrew translation of the latin word.
-    var explanation;    //the explanation of the word..
+    var wordToSearchReg;//the latin word in the page in regular expression format.
+    var hebrewWord;     //the hebrew translation of the latin word. (comes from the server who hold the dictionary).
+    var explanation;    //the explanation of the word.
 
     //server response variables
-    var wordsToreplace2; //list of words that comes from the server in order to switch them in the page.
+    var wordsToreplace2; //list of words (array) that comes from the server in order to switch them in the page.
     var serverResponse;
 
+    //sanding request to the server in order to bring the relevant words list that fit the current page.
     var myXMLhttpReq=new XMLHttpRequest(),
     method = "GET",
     url="https://speak-hebrew-lab-project.herokuapp.com/getUrlHebrewWords?url="+pageUrl;
 
-            console.log(url);
-            myXMLhttpReq.open(method, url, true);
-            myXMLhttpReq.onreadystatechange = function() {
-                if (myXMLhttpReq.readyState == XMLHttpRequest.DONE) {
 
-                    //console.log(serverResponse);
-                    serverResponse=JSON.parse(myXMLhttpReq.responseText);
-                    if(serverResponse.result==="ok"){
-                        console.log("Response is: ");
-                        console.log(serverResponse.data);
-                        wordsToreplace2=serverResponse.data;
-                        console.log("printing the latin words: ");
+    myXMLhttpReq.open(method, url, true);
+    myXMLhttpReq.onreadystatechange = function() {
+        if (myXMLhttpReq.readyState == XMLHttpRequest.DONE) {
+            //console.log(serverResponse);
+            serverResponse=JSON.parse(myXMLhttpReq.responseText);
+            if(serverResponse.result==="ok"){
+                console.log("Response is: ");
+                console.log(serverResponse.data);
+                wordsToreplace2=serverResponse.data;
 
-                        var numOfWordsToSwich=wordsToreplace2.length;
-                        console.log("***printing the  words in the page: ***");
-                        for(var i=0;i<numOfWordsToSwich;i++){
+                var numOfWordsToSwich=wordsToreplace2.length;
+                console.log("***printing the  words in the page: ***");
 
-                             wordToSearch=wordsToreplace2[i].word; //the latin word
-                             console.log("the latin word: "+wordToSearch);
+                //replace each one of the words in the page
+                for(var i=0;i<numOfWordsToSwich;i++){
 
-                             //create regular expression
-                             wordToSearchReg = new RegExp(wordToSearch, "g");
+                     wordToSearch=wordsToreplace2[i].word; //the latin word
+                     console.log("the latin word: "+wordToSearch);
 
-                             //get the hebrew word
-                             hebrewWord=wordsToreplace2[i].translation[0];//the hebrew word
-                             console.log("the hebrew word: "+hebrewWord);
+                     //create regular expression
+                     wordToSearchReg = new RegExp(wordToSearch, "g");
 
-                             //get thr explanation
-                             explanation=wordsToreplace2[i].explanation;
-                             if(explanation==null){
-                                 explanation="";
-                             }
+                     //get the hebrew word
+                     hebrewWord=wordsToreplace2[i].translation[0];//the hebrew word
+                     console.log("the hebrew word: "+hebrewWord);
 
-                             var newPage; //the new html after the replace
+                     //get the explanation
+                     explanation=wordsToreplace2[i].explanation;
+                     if(explanation==null){
+                         explanation="";
+                     }
 
-                             //repacing the latin word in hebrew words with diffrent style and set them as clickable elements to show popUp.
-                             newPage = myHtml.replace(wordToSearchReg, "<span class='latinWords'>"
-                                                                                +"<span>"+hebrewWord+"</span>"
-                                                                                +"<span class='popuptext' id='myPopup'>"
-                                                                                        +"<span class='latinWords'>"+hebrewWord+"</span>"
-                                                                                        +"<span class='hebrewWords'>"+wordToSearch+"</span>"
-                                                                                        +"<span class='explenation'><br>"+explanation+"</span>"
-                                                                                +"</span>"
-                                                                        +"</span>");
-                             //update the page with the new page
-                             document.body.innerHTML = newPage;
-                             myHtml=newPage;
+                     var newPage; //the new html after the replace
 
-                         }
-                        //Passing on any of the words in order that they will be clickable.
-                        setClickebleFuncionToAllElements();
-                    }
-                    else{ //error in response from the serber
-                        console.log("Error on response");
-                        console.log(serverResponse);
-                    }
-                }
-            };
-            myXMLhttpReq.send();
+                     //replacing the latin word in hebrew word- with different style.
+                     newPage = myHtml.replace(wordToSearchReg, "<span class='latinWords'>"
+                                                                        +"<span>"+hebrewWord+"</span>"
+                                                                        +"<span class='popuptext' id='myPopup'>"
+                                                                                +"<span class='latinWords'>"+hebrewWord+"</span>"
+                                                                                +"<span class='hebrewWords'>"+wordToSearch+"</span>"
+                                                                                +"<span class='explenation'><br>"+explanation+"</span>"
+                                                                        +"</span>"
+                                                                +"</span>");
+                     //update the page with the new page
+                     document.body.innerHTML = newPage;
+                     myHtml=newPage;
+
+                 }
+                //Passing on any of the words in order that they will be clickable.
+                setClickebleFuncionToAllElements();
+            }
+            else{ //error in response from the server
+                console.log("Error on response");
+                console.log(serverResponse);
+            }
+        }
+    };
+    myXMLhttpReq.send();
 }
 
-
-
-
-//not used for now
-function checkConnectedUser(){
-    //window.onload = function () {
-            chrome.storage.local.get(["talkHebrewUser"], function(items){
-                console.log("cheackConnectedUser().  user is  "+items.talkHebrewUser);
-                user=items.talkHebrewUser;
-                if(user==undefined){
-                    console.log("the user is: "+user);
-                    console.log("no user loged to the system");
-                }
-                else{ //user exsist
-                    console.log("the user is: "+user);
-                    if (document.readyState === 'complete') {
-                        console.log("document ready!");
-                        console.log("start processing..");
-                        switchWords();
-                    }
-                }
-            });
-}
 
 function userClickOnWord(hebrewWord,latinWord){
     console.log("userClickOnWord");
+    //updating the statistic of the word
     var statisticArrayLength =  userClickStatistic.length;
     var isFind = false;
     for(var i = 0;i < statisticArrayLength; i++){
@@ -268,29 +236,16 @@ function sortByKey(array, key) {
     });
 }
 
+//checking if the "auto replaced words button" in the extension menu is pressed= if so- replace the words.
 function cheackAutoReplaceSettings(){
-    console.log("back.js checking AutoReplaceSettings");
     chrome.storage.local.get(["enableAutoReplaceWords"], function(items){
         enableAutoReplaceWordsBool=items.enableAutoReplaceWords;
         console.log("back.js-enableAutoReplaceWordsBool is: "+enableAutoReplaceWordsBool);
         if(enableAutoReplaceWordsBool==true){
-            // if (document.readyState == 'complete') {
-                 switchWords();
-            // }
+            switchWords();
         }
-
     });
 }
 
 cheackAutoReplaceSettings();
 loadStatisticOnStart();
-
-
-// window.addEventListener ("load", myMain, false);
-//
-// function myMain (evt) {
-//     console.log("************ document ready! ************");
-//     console.log("start processing..");
-//     cheackAutoReplaceSettings();
-//     loadStatisticOnStart();
-// }

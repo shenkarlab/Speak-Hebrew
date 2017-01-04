@@ -3,6 +3,7 @@
  */
 console.log("statistic.js");
 
+//static array for testing
 var statArr=[
     {
         latinWord:"ג'קוזי",
@@ -25,7 +26,7 @@ var statArr=[
 
 window.onload = function () {
     CanvasJS.addColorSet("redBars",
-        [//colorSet Array
+        [//colorSet Array- red color only according to the design
             "#e73739",
         ]);
     var chart = new CanvasJS.Chart("chartContainer",
@@ -61,6 +62,5 @@ window.onload = function () {
                 }
             ]
         });
-
     chart.render();
 }
