@@ -11,6 +11,8 @@
 .extensionPageBlock{
     border: solid;
     border-color: #2cbad0;
+    margin-top: -2px;
+    padding-right: 4px;
 }
 
 .extensionClickableElement{
@@ -19,8 +21,31 @@
     color: #2cbad0;
     background: #ffffff;
     height: auto;
-    padding: 0px;
+    margin-top: -2px;
+    padding-right: 4px;
 
+}
+
+.popUpFooter{
+    border: solid;
+    border-color: #2cbad0;
+    height: 80px;
+
+
+    margin-top: -2px;
+    padding-right: 4px;
+    color: red;
+
+}
+a:link {
+    color: red;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+/* visited link */
+a:visited {
+    color: green;
 }
 
 
@@ -32,7 +57,6 @@
     color: red;
     font-weight: bold;
 }
-
 
 
 
