@@ -211,30 +211,7 @@ function loadStatisticOnStart() {
     })
 }
 
-function getUserClickStatistic(numberOfWords) {
-    var result;
-    userClickStatistic = sortByKey(userClickStatistic);
-    if(userClickStatistic.length <=  numberOfWords){
-        result = userClickStatistic;
-    }
-    else{
-        result = [];
-        var userClickStatisticLength = userClickStatistic.length;
-        for(var i = 0; i < numberOfWords;i++){
-            result[i] = userClickStatistic[userClickStatisticLength - i - 1];
-        }
-    }
-    console.log("result:");
-    console.log(result);
-    return result;
-}
 
-function sortByKey(array, key) {
-    return array.sort(function(a, b) {
-        var x = a[key]; var y = b[key];
-        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-    });
-}
 
 //checking if the "auto replaced words button" in the extension menu is pressed= if so- replace the words.
 function cheackAutoReplaceSettings(){

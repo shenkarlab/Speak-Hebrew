@@ -2,65 +2,81 @@
  * Created by orami on 1/4/2017.
  */
 console.log("statistic.js");
+var userClickStatistic;
 
-//static array for testing
-var statArr=[
-    {
-        latinWord:"ג'קוזי",
-        hebrewWord:"אמבט עיסוי",
-        clicked:4
-    },
-    {
-        latinWord:"זיגזג",
-        hebrewWord:"סכסך",
-        clicked:8
-    },
-    {
-        latinWord:"מגזין",
-        hebrewWord:"עיתון",
-        clicked:3
-    },
-];
-
-
-
-window.onload = function () {
-    CanvasJS.addColorSet("redBars",
-        [//colorSet Array- red color only according to the design
-            "#e73739",
-        ]);
-    var chart = new CanvasJS.Chart("chartContainer",
-        {
-            colorSet: "redBars",
-            theme: "theme4",
-            title:{
-                text: "שלושת המילים הכי נפוצות"
-            },
-            axisX:{
-                lineThickness: 0,
-                labelFontColor: "white",
-                lineColor: "white",
-                tickLength: 0,
-            },
-            axisY:{
-                lineThickness: 0,
-                labelFontColor: "white",
-                lineColor: "white",
-                tickLength: 0,
-                display:false
-            },
-            data: [
-
-                {
-                    type:"column",
-                    dataPoints: [
-                        {  y: 4,  label: statArr[0].latinWord},
-                        {  y: 8,  label: statArr[1].latinWord},
-                        {  y: 3,  label: statArr[2].latinWord}
-
-                    ]
-                }
-            ]
+window.onload = function(){
+    chrome.storage.local.get(["userClickStatistic"], function(items){
+        if(items.userClickStatistic === undefined){
+            userClickStatistic = [];
+        }
+        else{
+            userClickStatistic = items.userClickStatistic;
+        }
+        var statisticsArray =getUserClickStatistic(5);
+        var statisticData = [];
+        statisticsArray.forEach(function (wordInStatistic) {
+            statisticData.push({
+                y:wordInStatistic.clicked,
+                label:wordInStatistic.latinWord
+            })
         });
-    chart.render();
+        CanvasJS.addColorSet("redBars",
+            [//colorSet Array- red color only according to the design
+                "#e73739"
+            ]);
+        var chart = new CanvasJS.Chart("chartContainer",
+            {
+                colorSet: "redBars",
+                theme: "theme4",
+                title:{
+                    text: "המילים הכי נפוצות"
+                },
+                axisX:{
+                    lineThickness: 0,
+                    labelFontColor: "white",
+                    lineColor: "white",
+                    tickLength: 0
+                },
+                axisY:{
+                    lineThickness: 0,
+                    labelFontColor: "white",
+                    lineColor: "white",
+                    tickLength: 0,
+                    display:false
+                },
+                data: [
+                    {
+                        type:"column",
+                        dataPoints:statisticData
+                    }
+                ]
+            });
+        chart.render();
+    });
+};
+
+
+function getUserClickStatistic(numberOfWords) {
+    var result;
+    console.log(userClickStatistic);
+    userClickStatistic = sortByKey(userClickStatistic);
+    console.log(userClickStatistic);
+    if(userClickStatistic.length <=  numberOfWords){
+        result = userClickStatistic;
+    }
+    else{
+        result = [];
+        var userClickStatisticLength = userClickStatistic.length;
+        for(var i = 0; i < numberOfWords;i++){
+            result[i] = userClickStatistic[userClickStatisticLength - i - 1];
+        }
+    }
+    return result;
+}
+
+function sortByKey(array, key) {
+    return array.sort(function(a, b) {
+        var x = a[key]; var y = b[key];
+        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+    });
 }
