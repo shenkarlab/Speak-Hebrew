@@ -59,7 +59,7 @@ window.onload = function(){
 function getUserClickStatistic(numberOfWords) {
     var result;
     console.log(userClickStatistic);
-    userClickStatistic = sortByKey(userClickStatistic);
+    userClickStatistic = userClickStatistic.sort(sortJson("clicked"));
     console.log(userClickStatistic);
     if(userClickStatistic.length <=  numberOfWords){
         result = userClickStatistic;
@@ -74,9 +74,14 @@ function getUserClickStatistic(numberOfWords) {
     return result;
 }
 
-function sortByKey(array, key) {
-    return array.sort(function(a, b) {
-        var x = a[key]; var y = b[key];
-        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-    });
+function sortJson(prop){
+    return function(objectA,objectB){
+        if( objectA[prop] > objectB[prop]){
+            return -1;
+        }else if( objectA[prop] < objectB[prop] ){
+            return 1;
+        }
+        return 0;
+    }
 }
+
