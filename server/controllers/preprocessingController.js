@@ -36,6 +36,12 @@ function getWordsArray(str) {
     var strArray = str.split(";");
     var wordArray = [];
     strArray.forEach(function (word){
+        if(word.charAt(0) === " "){
+            word = word.substr(1);
+        }
+        if(word.charAt(word.length - 1) === " "){
+            word = word.substring(0, word.length - 1);
+        }
         wordArray.push({
             word:word
         })
