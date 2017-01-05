@@ -162,7 +162,6 @@ function  switchWords(){
 
 
 function userClickOnWord(hebrewWord,latinWord){
-    console.log("userClickOnWord");
     //updating the statistic of the word
     var statisticArrayLength =  userClickStatistic.length;
     var isFind = false;
@@ -181,21 +180,27 @@ function userClickOnWord(hebrewWord,latinWord){
             clicked:1
         });
     }
-
     chrome.storage.local.set({ "userClickStatistic": userClickStatistic }, function(){
         console.log("Statistic saved");
     });
+    updateGlobalClickStatistic(latinWord);
+}
 
-    chrome.storage.local.get(["userClickStatistic"], function(items){
-        console.log("Statistik:");
-        if(items.userClickStatistic === undefined){
-            console.log("undefined");
+function updateGlobalClickStatistic(word) {
+    var myXMLhttpReq=new XMLHttpRequest(),
+        method = "GET",
+        url="https://speak-hebrew-lab-project.herokuapp.com/userClickedOnTranslatedWord/"+word;
+    myXMLhttpReq.open(method, url, true);
+    myXMLhttpReq.onreadystatechange = function() {
+        if (myXMLhttpReq.readyState == XMLHttpRequest.DONE) {
+            serverResponse=JSON.parse(myXMLhttpReq.responseText);
+            if(serverResponse.result!=="ok"){  //error in response from the server
+                console.log("Error on response");
+                console.log(serverResponse);
+            }
         }
-        else{
-            console.log(userClickStatistic)
-        }
-    });
-    getUserClickStatistic(2);
+    };
+    myXMLhttpReq.send();
 }
 
 function loadStatisticOnStart() {

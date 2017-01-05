@@ -15,7 +15,7 @@ exports.updateStatistics = function(url,isNewUrl,result){
 
 exports.updateClickedStatistics = function(word){
     var query  = globalStatisticsSchema.findOne().where({
-        word:word.word
+        word:word
     });
     query.exec(function (err,doc) {
         if(err){
