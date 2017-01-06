@@ -16,7 +16,8 @@ exports.getTranslatableWords = function(url,dictionary,res,isNewUrl){
                 var str = (window.$("body").text());
                 str = JSON.stringify(str);
                 var result = "";
-                for(var i = 0; i < str.length;i++){
+                var strLength =  str.length;
+                for(var i = 0; i < strLength;i++){
                     if (str.charCodeAt(i) >= 0x590 && str.charCodeAt(i) <= 0x5FF){
                         result+=str[i];
                     }
@@ -35,7 +36,8 @@ exports.getTranslatableWords = function(url,dictionary,res,isNewUrl){
                 var changedJson = [];
                 var shareInfoLen = Object.keys(jsonObj).length;
                 var changedWord;
-                for(i = 0; i < hebrewWords.length; i++) {
+                var hebrewWordsLength =  hebrewWords.length;
+                for(i = 0; i < hebrewWordsLength; i++) {
                       for(var j=0; j< shareInfoLen; j++){
                          if(hebrewWords[i] == jsonObj[j].words[0].word){
                              var translationWord = [];
@@ -52,7 +54,6 @@ exports.getTranslatableWords = function(url,dictionary,res,isNewUrl){
                     }
                 }
             }
-           // JSON.stringify(changedJson);
             statisticsController.updateStatistics(url,isNewUrl,changedJson);
             utilitiesController.returnResponse(res,200,true,changedJson);
         });

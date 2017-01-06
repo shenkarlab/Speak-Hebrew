@@ -1,7 +1,7 @@
+'use strict';
 /**
  * Created by orami on 1/4/2017.
  */
-console.log("statistic.js");
 var userClickStatistic;
 
 window.onload = function(){
@@ -12,7 +12,7 @@ window.onload = function(){
         else{
             userClickStatistic = items.userClickStatistic;
         }
-        var statisticsArray =getUserClickStatistic(5);
+        var statisticsArray =getUserClickStatistic(3);
         var statisticData = [];
         statisticsArray.forEach(function (wordInStatistic) {
             statisticData.push({
@@ -55,7 +55,6 @@ window.onload = function(){
     });
 };
 
-
 function getUserClickStatistic(numberOfWords) {
     var result;
     console.log(userClickStatistic);
@@ -68,7 +67,7 @@ function getUserClickStatistic(numberOfWords) {
         result = [];
         var userClickStatisticLength = userClickStatistic.length;
         for(var i = 0; i < numberOfWords;i++){
-            result[i] = userClickStatistic[userClickStatisticLength - i - 1];
+            result[i] = userClickStatistic[i];
         }
     }
     return result;
@@ -84,4 +83,3 @@ function sortJson(prop){
         return 0;
     }
 }
-
