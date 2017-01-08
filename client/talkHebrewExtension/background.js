@@ -69,7 +69,7 @@ function  switchWords(){
             if(serverResponse.result === "ok"){
                 wordsToReplace = serverResponse.data;
                 var numOfWordsToSwich = wordsToReplace.length;
-
+                updateNumberOfWordsThatAutoReplace(numOfWordsToSwich);
                 //replace each one of the words in the page
                 for(var i=0;i<numOfWordsToSwich;i++){
                     wordToSearch = wordsToReplace[i].word; //the latin word
