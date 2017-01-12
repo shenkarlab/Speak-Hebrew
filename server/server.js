@@ -14,8 +14,8 @@ app.use(function (req,res,next) {
 
 app.get('/getUrlHebrewWords',speakHebrewAction.getUrlHebrewWords);
 app.get('/userClickedOnTranslatedWord/:word',speakHebrewAction.userClickedOnTranslatedWord);
-app.get('/getAllUsersClickedTranslatedWords/:numberOfWords',speakHebrewAction.getAllUsersClickedTranslatedWords);
-app.get('/getAllUserSwitchedTranslatedWords/:numberOfWords',speakHebrewAction.getAllUserSwitchedTranslatedWords);
+app.get('/getStatisticsTopClickedWords/:numberOfWords',speakHebrewAction.getStatisticsTopClickedWords);
+app.get('/getStatisticsTopSwitchedWords/:numberOfWords',speakHebrewAction.getStatisticsTopSwitchedWords);
 app.listen(port, function(){
     console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 });

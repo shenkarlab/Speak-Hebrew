@@ -1,6 +1,7 @@
 'use strict';
 var urlsSchema = require('./../db/urlsSchema');
 var globalStatisticsSchema = require('./../db/globalStatisticsSchema');
+var utilitiesController = require('./utilitiesController');
 
 exports.updateStatistics = function(url,isNewUrl,result){
     if(true === isNewUrl){
@@ -32,6 +33,38 @@ exports.updateClickedStatistics = function(word){
         }
     });
 };
+
+exports.getStatisticsTopClickedWords = function (res, numberOfWords) {
+    getStatisticByCriteria(res, numberOfWords,"clickCount");
+};
+
+exports.getStatisticsTopSwitchedWords = function (res, numberOfWords) {
+    getStatisticByCriteria(res, numberOfWords,"translationCount")
+};
+
+function getStatisticByCriteria(res,numberOfWords,criteria) {
+
+    var sortBy;
+    if(criteria === "clickCount"){
+         sortBy = {
+            clickCount:-1
+        };
+    }
+    else{
+         sortBy = {
+             translationCount:-1
+        };
+    }
+    var query  = globalStatisticsSchema.find().sort(sortBy).limit(parseInt(numberOfWords));
+    query.exec(function (err,data) {
+        if(err){
+            console.log(err);
+        }
+        else{
+            utilitiesController.returnResponse(res, 200, true, data);
+        }
+    });
+}
 
 function updateGlobalStatisticsForWord(word){
     var query  = globalStatisticsSchema.findOne().where({

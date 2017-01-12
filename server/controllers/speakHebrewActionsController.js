@@ -35,14 +35,14 @@ exports.userClickedOnTranslatedWord = function(req,res) {
     utilitiesController.returnResponse(res, 200, true, "ok");
 };
 
-exports.getAllUsersClickedTranslatedWords = function(req,res) {//todo
+exports.getStatisticsTopClickedWords = function(req, res) {
     var numberOfWords = req.params.numberOfWords;
-    utilitiesController.returnResponse(res, 200, true, "ok");
+    statisticsController.getStatisticsTopClickedWords(res,numberOfWords)
 };
 
-exports.getAllUserSwitchedTranslatedWords = function(req,res) {//todo
+exports.getStatisticsTopSwitchedWords = function(req, res) {
     var numberOfWords = req.params.numberOfWords;
-    utilitiesController.returnResponse(res, 200, true, "ok");
+    statisticsController.getStatisticsTopSwitchedWords(res,numberOfWords)
 };
 
 function preprocessingMode(){
