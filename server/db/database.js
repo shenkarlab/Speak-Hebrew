@@ -18,15 +18,15 @@ var db = mongoose.connection;// a global connection variable
 
 // Event handlers for Mongoose
 db.on('error', function (err) {
-    console.log('Mongoose: Error: ' + err);
+    console.error('Mongoose: Error: ' + err);
 });
 db.on('open', function(){
     flagIsConnection = true;
-    console.log('Mongoose: Connection established');
+    console.info('Mongoose: Connection established');
 });
 db.on('disconnected', function(){
     flagIsConnection = false;
-    console.log('Mongoose: Connection stopped,recconect');
+    console.info('Mongoose: Connection stopped,recconect');
     mongoose.connect(config.mongoUrl, options);
 });
 db.on('reconnected', function (){

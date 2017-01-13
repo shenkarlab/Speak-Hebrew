@@ -4,11 +4,12 @@ var wordsSchema = require('./../db/wordsSchema');
 var urlsSchema = require('./../db/urlsSchema');
 var DB = require('./../db/database');
 var conf =  require('./../config.json');
+var responseMessage = require('./../responseMessage.json');
 var preprocessingController = require('./preprocessingController');
 var textualLogicController = require('./textualLogicController');
 var utilitiesController = require('./utilitiesController');
 var statisticsController = require('./statisticsController');
-var errorStr = "An server error occurred.Error code:";
+
 var dictionary;
 
 exports.getUrlHebrewWords = function(req,res) {
@@ -19,8 +20,8 @@ exports.getUrlHebrewWords = function(req,res) {
         });
         query.exec(function (err,doc) {
             if(err) {
-                console.log(err);
-                utilitiesController.returnResponse(res,500,false,err)
+                console.error(err);
+                utilitiesController.returnResponse(res,500,false,responseMessage.dbError)
             }
             else{
                 var isNewUrl = (doc === null);
@@ -32,7 +33,6 @@ exports.getUrlHebrewWords = function(req,res) {
 exports.userClickedOnTranslatedWord = function(req,res) {
     var word = req.params.word;
     statisticsController.updateClickedStatistics(word);
-    utilitiesController.returnResponse(res, 200, true, "ok");
 };
 
 exports.getStatisticsTopClickedWords = function(req, res) {
@@ -63,7 +63,7 @@ function getDictionaryFromDb(){
     }
     wordsSchema.find({},function (err,data) {
         if(err){
-            console.log(err);
+            console.error(err);
         }
         dictionary = data;
         console.log("Dictionary OK.")
@@ -75,13 +75,13 @@ if (conf.preprocessingMode) {
 }
 
 setTimeout(function () {    //wait for mongoose connection established
-    console.log("Load dictionary....");
+    console.info("Load dictionary....");
     var count = 1;
-    console.log('Attempt number  '+count);
+    console.info('Attempt numb/er  '+count);
     getDictionaryFromDb();
     setTimeout(function () {    //wait for get data from mongo db + calculate map
         if (dictionary !== undefined) {
-            console.log('Server ready to work.');
+            console.info('Server ready to work.');
             return;
         }
         var intervalObject = setInterval(function () {  // try again if attempt fail
@@ -89,7 +89,7 @@ setTimeout(function () {    //wait for mongoose connection established
             count++;
             console.log('Attempt number  ' + count);
             if (dictionary !== undefined) {
-                console.log('Server ready to work.');
+                console.info('Server ready to work.');
                 clearInterval(intervalObject);
             }
         },10000);

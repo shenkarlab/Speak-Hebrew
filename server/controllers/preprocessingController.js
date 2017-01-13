@@ -6,7 +6,7 @@ exports.preprocessing = function() {    //return map data ( not calculate map)
     console.log("Start preprocessing");
     wordsSchema.remove({}, function(err) {
             if (err) {
-                console.log(err);
+                console.error(err);
             } else {
                 wordsList.forEach(function (word) {
                     var category = getCategoryIfExist(word.word);

@@ -1,0 +1,6 @@
+{
+  "serverError" : "SERVER_ERROR",
+  "illegalArgument":"ILLEGAL_ARGUMENT",
+  "dbError" : "DB_ERROR",
+  "statisticSaved":"STATISTICS_SAVED"
+}
