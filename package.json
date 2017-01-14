@@ -4,7 +4,7 @@
   "description": "Shenkar Design & Engineering Lab project",
   "main": "index.js",
   "scripts": {
-    "start": "forever start index.js"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
