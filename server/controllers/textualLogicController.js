@@ -6,6 +6,7 @@ var jsdom = require("jsdom");
 
 exports.getTranslatableWords = function(url,dictionary,res,isNewUrl){
     if(!contentsHebrewSymbols(url)){
+        var changedJson = [];
         jsdom.env(
             url,
             ["http://code.jquery.com/jquery.js"],
@@ -35,7 +36,6 @@ exports.getTranslatableWords = function(url,dictionary,res,isNewUrl){
                         }
                     });
                     var jsonObj = dictionary;
-                    var changedJson = [];
                     var shareInfoLen = Object.keys(jsonObj).length;
                     var changedWord;
                     var hebrewWordsLength =  hebrewWords.length;
