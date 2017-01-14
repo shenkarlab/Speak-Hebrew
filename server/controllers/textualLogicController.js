@@ -55,12 +55,12 @@ exports.getTranslatableWords = function(url,dictionary,res,isNewUrl){
                             }
                         }
                     }
-                }
-                if(changedJson.length > 0){
-                    statisticsController.updateStatistics(url,isNewUrl,changedJson);
-                }
-                else{
-                    utilitiesController.returnResponse(res,200,true,changedJson);
+                    if(changedJson.length > 0){
+                        statisticsController.updateStatistics(url,isNewUrl,changedJson);
+                    }
+                    else{
+                        utilitiesController.returnResponse(res,200,true,changedJson);
+                    }
                 }
             });
     }

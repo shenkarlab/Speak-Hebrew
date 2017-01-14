@@ -11,6 +11,5 @@ exports.returnResponse = function(res,status,isSuccessful,data){
             result:"fail",
             error:data
         });
-
     }
 };
