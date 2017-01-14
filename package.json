@@ -1,10 +1,10 @@
 {
   "name": "speak-hebrew",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Shenkar Design & Engineering Lab project",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "forever start index.js"
   },
   "repository": {
     "type": "git",
@@ -18,6 +18,7 @@
   "homepage": "https://github.com/shenkarlab/Speak-Hebrew#readme",
   "dependencies": {
     "express": "4.*.*",
+    "forever": "0.*.*",
     "jsdom": "9.*.*",
     "mongoose": "4.*.*"
   }
