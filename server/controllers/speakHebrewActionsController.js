@@ -77,7 +77,7 @@ if (conf.preprocessingMode) {
 setTimeout(function () {    //wait for mongoose connection established
     console.info("Load dictionary....");
     var count = 1;
-    console.info('Attempt numb/er  '+count);
+    console.info('Attempt number  '+count);
     getDictionaryFromDb();
     setTimeout(function () {    //wait for get data from mongo db + calculate map
         if (dictionary !== undefined) {
