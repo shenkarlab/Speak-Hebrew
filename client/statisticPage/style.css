@@ -1,0 +1,21 @@
+.axis path, .axis line {
+    fill: none;
+    stroke: #fff;
+}
+.axis text {
+    font-size: 13px;
+}
+
+.bar {
+    fill: white;
+}
+
+svg text.label {
+    fill:blue;
+    font: 15px;
+    font-weight: 400;
+    text-anchor: middle;
+}
+#chartID {
+    min-width: 531px;
+}
