@@ -1,4 +1,4 @@
-var margin,width,height,xScale,yScale,xAxis,yAxis,svgContainer;
+var margin,width,height,xScale,yScale,xAxis,yAxis,svgContainer,xAxis_g;
 var numberOfWords = 15;
 var apiCall = "getStatisticsTopSwitchedWords";
 var domain = "https://speak-hebrew-lab-project.herokuapp.com";
@@ -54,7 +54,7 @@ function buildGraph(number,wordToShow) {
     xScale.domain(data.map(function(d) { return d[wordToShow]; }));
     yScale.domain([0, d3.max(data, function(d) { return d[number]; })]);
 
-    var xAxis_g = svgContainer.append("g")
+    xAxis_g = svgContainer.append("g")
         .attr("class", "x axis")
         .attr("transform", "translate(0," + (height) + ")")
         .call(xAxis)

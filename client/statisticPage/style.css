@@ -2,20 +2,26 @@
     fill: none;
     stroke: #fff;
 }
+
 .axis text {
     font-size: 13px;
 }
 
 .bar {
     fill: white;
+    font-size:50px;
 }
 
 svg text.label {
     fill:blue;
-    font: 15px;
     font-weight: 400;
     text-anchor: middle;
 }
+
 #chartID {
     min-width: 531px;
+}
+
+text.label{
+    background-color: #2cbad0;
 }
