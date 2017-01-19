@@ -32,7 +32,7 @@ exports.getUrlHebrewWords = function(req,res) {
 
 exports.userClickedOnTranslatedWord = function(req,res) {
     var word = req.params.word;
-    statisticsController.updateClickedStatistics(word);
+    statisticsController.updateClickedStatistics(res,word);
 };
 
 exports.getStatisticsTopClickedWords = function(req, res) {

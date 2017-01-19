@@ -15,7 +15,7 @@ exports.updateStatistics = function(url,isNewUrl,result){
     });
 };
 
-exports.updateClickedStatistics = function(word){
+exports.updateClickedStatistics = function(res,word){
     var query  = globalStatisticsSchema.findOne().where({
         word:word
     });
