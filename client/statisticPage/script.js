@@ -32,15 +32,20 @@ function buildGraph(number,wordToShow) {
         graphData.push({
             y:dataFromServer[i][number],
             indexLabel:dataFromServer[i][wordToShow],
-            color:"none",
-            lineColor:"white"
+            color:"rgba(0, 0, 0, 0)"
         });
     }
     var chart = new CanvasJS.Chart("chartContainer",
     {
-      title:{
-        text: "Index Labels with Background"
+        axisX:{
+        lineThickness:0,
+        tickThickness:0,
+        valueFormatString:" ",//space
       },
+        axisY2:{
+        interval: 2,
+        margin: 60,
+     },
       data: [
       {
        indexLabelPlacement: "outside",
@@ -48,6 +53,7 @@ function buildGraph(number,wordToShow) {
        indexLabelFontColor: "red",
        type: "line",
        lineColor: "rgba(0, 0, 0, 0)",
+       axisYType: "secondary",
        dataPoints:graphData
      }
 
