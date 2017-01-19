@@ -25,3 +25,7 @@ svg text.label {
 text.label{
     background-color: #2cbad0;
 }
+
+div text{
+    background-color: red;
+}
