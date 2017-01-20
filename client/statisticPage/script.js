@@ -14,6 +14,7 @@ function  getData() {
                 serverResponse = JSON.parse(myXMLhttpReq.responseText);
                 if(serverResponse.result === "ok"){
                     dataFromServer = serverResponse.data;
+                    dataFromServer = dataFromServer.sort(sortJson("translationCount"));
                     buildGraph("translationCount","word");
                 }
                 else{ //error in response from the server
@@ -33,8 +34,7 @@ function buildGraph(number,wordToShow) {
             y:dataFromServer[i][number],
             indexLabel:dataFromServer[i][wordToShow],
             color:"rgba(0, 0, 0, 0)",
-            lineColor:"rgba(0, 0, 0, 0)",
-
+            lineColor:"rgba(0, 0, 0, 0)"
         });
     }
     var chart = new CanvasJS.Chart("chartContainer",
@@ -44,18 +44,14 @@ function buildGraph(number,wordToShow) {
         axisX:{
         lineThickness:0,
         tickThickness:0,
-        valueFormatString:" ",//space
-
-
+        valueFormatString:" "//space
       },
         axisY2:{
         interval: 2,
         margin: 60,
         gridColor:"#2cbad0",
         gridThickness: 1,
-        lineColor:"#f7be64",
-
-
+        lineColor:"#f7be64"
      },
       data: [
       {
@@ -75,3 +71,15 @@ function buildGraph(number,wordToShow) {
   }
 
 getData();
+
+
+function sortJson(prop){
+    return function(objectA,objectB){
+        if( objectA[prop] > objectB[prop]){
+            return 1;
+        }else if( objectA[prop] < objectB[prop] ){
+            return -1;
+        }
+        return 0;
+    }
+}
