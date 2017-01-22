@@ -49,7 +49,6 @@ function buildGraph(number,wordToShow) {
       },
         axisY2:{
         interval: 2,
-        margin: 60,
         gridColor:"#2cbad0",
         gridThickness: 1,
         lineColor:"#f7be64",

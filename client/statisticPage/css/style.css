@@ -1,0 +1,24 @@
+*{
+  margin: 0px;
+  padding: 0px;
+  
+}
+header, footer, main, aside, article, section, nav, span {
+  display:block;
+}
+
+#logo{
+  background-image: url(../images/logo.png);
+  height: 100px;
+  background-repeat: no-repeat;
+  background-position: 98%;
+  background-color: yellow;
+}
+
+#logotitel{
+	font-size:90px;
+	text-align: right;
+	padding-right: 130px;
+	padding-top: 0px;
+
+}
