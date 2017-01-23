@@ -15,7 +15,7 @@ function  getData() {
                 if(serverResponse.result === "ok"){
                     dataFromServer = serverResponse.data;
                     dataFromServer = dataFromServer.sort(sortJson("translationCount"));
-                    buildGraph("translationCount","word");
+                    buildGraph("translationCount","word","words_translation");
                 }
                 else{ //error in response from the server
                     console.log("Error on response");
@@ -33,7 +33,7 @@ function buildGraph(number,wordToShow,hebWord) {
         graphData.push({
             y:dataFromServer[i][number],
             indexLabel:dataFromServer[i][wordToShow],
-            lable:dataFromServer[i][hebWord],
+            name:dataFromServer[i][hebWord],
             color:"rgba(0, 0, 0, 0)",
             lineColor:"rgba(0, 0, 0, 0)"
         });
@@ -70,9 +70,8 @@ function buildGraph(number,wordToShow,hebWord) {
        markerSize: 100,
        type: "line",
        axisYType: "secondary",
-       // name: "לועזית", 
-       label: "עברית", // need to be dynamic ==> hebWord
-       toolTipContent: "<div class='toolPopUp'> {x}<span class='wordPopup'>{indexLabel}</span>{label}<span class='wordExplanation'> יחדכיכבידחלג בדגלךכע,ש כגחלכ שךגלקםרמ כלגדק דחגישו</span></div>",
+       // label: "עברית", // need to be dynamic ==> hebWord
+       toolTipContent: "<div class='toolPopUp'> {y}<span class='wordPopup'>{indexLabel}</span>{name}<span class='wordExplanation'> יחדכיכבידחלג בדגלךכע,ש כגחלכ שךגלקםרמ כלגדק דחגישו</span></div>",
        dataPoints:graphData
      }
 
