@@ -40,7 +40,6 @@ function buildGraph(number,wordToShow) {
     {
         backgroundColor: "#f8f9fd",
         
-
         axisX:{
         lineThickness:0,
         tickThickness:0,
@@ -57,6 +56,11 @@ function buildGraph(number,wordToShow) {
         tickLength: 25,
         tickColor:"rgba(0, 0, 0, 0"
      },
+     toolTip:{ 
+        backgroundColor: "#EBF2FA" , 
+    //   content: "{name} : {y}",
+
+     },
       data: [
       {
        indexLabelPlacement: "outside",
@@ -65,6 +69,9 @@ function buildGraph(number,wordToShow) {
        markerSize: 100,
        type: "line",
        axisYType: "secondary",
+       name: "לועזית", // need to be dynamic ==> latinWord
+       label: "עברית", // need to be dynamic ==> hebWord
+       toolTipContent: "<div class='toolPopUp'> {x}<span class='wordPopup'>{name}</span>{label}<span class='wordExplanation'> יחדכיכבידחלג בדגלךכע,ש כגחלכ שךגלקםרמ כלגדק דחגישו</span></div>",
        dataPoints:graphData
      }
 

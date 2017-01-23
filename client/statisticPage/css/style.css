@@ -22,3 +22,28 @@ header, footer, main, aside, article, section, nav, span {
 	padding-top: 0px;
 
 }
+
+.toolPopUp{
+
+  background-color: #EBF2FA;
+  height: auto;
+  width: 170px;
+  color: #EEC166;
+  font-size: 22px;
+  text-align: center;
+  margin: 10px;
+  
+}
+
+.wordPopup{
+  color: #5D8688;
+  display: inline-block;
+  margin-left: 25px;
+  margin-right: 25px;
+}
+
+.wordExplanation{
+  margin-top: 10px;
+  color: #000000;
+  white-space: initial;
+}
