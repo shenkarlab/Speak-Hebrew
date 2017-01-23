@@ -26,13 +26,14 @@ function  getData() {
         myXMLhttpReq.send();
 }
 
-function buildGraph(number,wordToShow) {
+function buildGraph(number,wordToShow,hebWord) {
     var graphData = [];
     var lengthOfData = dataFromServer.length;
     for(var i = 0; i < lengthOfData; i++){
         graphData.push({
             y:dataFromServer[i][number],
             indexLabel:dataFromServer[i][wordToShow],
+            lable:dataFromServer[i][hebWord],
             color:"rgba(0, 0, 0, 0)",
             lineColor:"rgba(0, 0, 0, 0)"
         });
@@ -69,9 +70,9 @@ function buildGraph(number,wordToShow) {
        markerSize: 100,
        type: "line",
        axisYType: "secondary",
-       name: "לועזית", // need to be dynamic ==> latinWord
+       // name: "לועזית", 
        label: "עברית", // need to be dynamic ==> hebWord
-       toolTipContent: "<div class='toolPopUp'> {x}<span class='wordPopup'>{name}</span>{label}<span class='wordExplanation'> יחדכיכבידחלג בדגלךכע,ש כגחלכ שךגלקםרמ כלגדק דחגישו</span></div>",
+       toolTipContent: "<div class='toolPopUp'> {x}<span class='wordPopup'>{indexLabel}</span>{label}<span class='wordExplanation'> יחדכיכבידחלג בדגלךכע,ש כגחלכ שךגלקםרמ כלגדק דחגישו</span></div>",
        dataPoints:graphData
      }
 
