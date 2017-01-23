@@ -36,10 +36,10 @@ function buildGraph(number,wordToShow) {
             color:"rgba(0, 0, 0, 0)",
             lineColor:"rgba(0, 0, 0, 0)"
         });
-    }
-    var chart = new CanvasJS.Chart("chartContainer",
+    }    var chart = new CanvasJS.Chart("chartContainer",
     {
         backgroundColor: "#f8f9fd",
+        
 
         axisX:{
         lineThickness:0,
@@ -51,8 +51,11 @@ function buildGraph(number,wordToShow) {
         interval: 2,
         gridColor:"#2cbad0",
         gridThickness: 1,
-        lineColor:"#f7be64",
-        tickLength: 0,
+        // lineColor:"#f7be64", //yellow line color
+        lineColor:"rgba(0, 0, 0, 0)",
+        margin: 20,
+        tickLength: 25,
+        tickColor:"rgba(0, 0, 0, 0"
      },
       data: [
       {
