@@ -6,6 +6,37 @@ var enableAutoReplaceWordsBool = true; //if true- replace the latin words
 var pageUrl = window.location.href;
 /*save the current number of words that were replaces in the locally in chrome cash
 (present the numbers in extension menu= popupPge.html)*/
+var wordsToReplace; //list of words (array) that comes from the server in order to switch them in the page.
+var domain = "https://speak-hebrew-lab-project.herokuapp.com";
+var apiCall = "getUrlHebrewWords?url=";
+/*the main function that switch the latin word in the html page to the relevant hebrew word*/
+getSwitchWords();
+function  getSwitchWords(){
+    var myHtml=document.body.innerHTML; //get the current html
+    var serverResponse;
+    //sanding request to the server in order to bring the relevant words list that fit the current page.
+    var myXMLhttpReq=new XMLHttpRequest(),
+        method = "GET",
+        url=domain+"/"+apiCall+pageUrl;
+
+    myXMLhttpReq.open(method, url, true);
+    myXMLhttpReq.onreadystatechange = function() {
+        if (myXMLhttpReq.readyState == XMLHttpRequest.DONE) {
+            serverResponse = JSON.parse(myXMLhttpReq.responseText);
+            if(serverResponse.result === "ok"){
+                wordsToReplace = serverResponse.data;
+                console.log(wordsToReplace);
+            }
+            else{ //error in response from the server
+                console.log("Error on response");
+                console.log(serverResponse);
+            }
+        }
+    };
+    myXMLhttpReq.send();
+}
+
+
 function updateNumberOfWordsThatAutoReplace(numOfWords){
     var totalUserAmount;
     /*updating the number of words that were switched on the current page*/
@@ -52,22 +83,6 @@ function  switchWords(){
     var hebrewWord;     //the hebrew translation of the latin word. (comes from the server who hold the dictionary).
     var explanation;    //the explanation of the word.
 
-    //server response variables
-    var wordsToReplace; //list of words (array) that comes from the server in order to switch them in the page.
-    var serverResponse;
-
-    //sanding request to the server in order to bring the relevant words list that fit the current page.
-    var myXMLhttpReq=new XMLHttpRequest(),
-        method = "GET",
-        url="https://speak-hebrew-lab-project.herokuapp.com/getUrlHebrewWords?url="+pageUrl;
-
-
-    myXMLhttpReq.open(method, url, true);
-    myXMLhttpReq.onreadystatechange = function() {
-        if (myXMLhttpReq.readyState == XMLHttpRequest.DONE) {
-            serverResponse = JSON.parse(myXMLhttpReq.responseText);
-            if(serverResponse.result === "ok"){
-                wordsToReplace = serverResponse.data;
                 var numOfWordsToSwich = wordsToReplace.length;
                 updateNumberOfWordsThatAutoReplace(numOfWordsToSwich);
                 //replace each one of the words in the page
@@ -100,14 +115,7 @@ function  switchWords(){
                 }
                 //Passing on any of the words in order that they will be clickable.
                 setClickebleFuncionToAllElements();
-            }
-            else{ //error in response from the server
-                console.log("Error on response");
-                console.log(serverResponse);
-            }
-        }
-    };
-    myXMLhttpReq.send();
+    
 }
 
 
@@ -181,9 +189,18 @@ function checkAutoReplaceSettings(){
 }
 
 document.onreadystatechange = function () {
-    if (document.readyState === "complete") {
+    startMainScript();
+};
+
+function startMainScript() {
+    if (document.readyState === "complete" && wordsToReplace !== null) {
         console.log("script start:");
         checkAutoReplaceSettings();
         loadStatisticOnStart();
     }
-};
+    else{
+        setTimeout(function(){
+            startMainScript()
+        }, 1000);
+    }
+}
