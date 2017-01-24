@@ -5,6 +5,7 @@ var Schema = mongoose.Schema;
 var globalStatistics = new Schema({
     word:String,
     words_translation:String,
+    explanation:String,
     translationCount:Number,
     clickCount:Number
 },{collection:'globalStatistic'});

@@ -113,6 +113,7 @@ function createStatisticDocForWord(word){
         {
             word:word.word,
             words_translation:word.translation,
+            explanation:word.explanation,
             translationCount:1,
             clickCount:0
         });
