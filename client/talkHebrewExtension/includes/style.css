@@ -1,6 +1,9 @@
 /*style for popUp page*/
+.extencionBody{
+    background: #e9f2fb;
+}
+
 .mainPopUpSection{
-    background-color: #ffffff;
     color:black;
     padding: 0px;
     width: 200px;
@@ -9,46 +12,51 @@
 }
 
 .extensionPageBlock{
-    border: solid ;
-    border-width: 1px;
-    border-color: #2cbad0;
+    margin-top:25px ;
+    /*border: solid ;*/
+    /*border-width: 1px;*/
+    /*border-color: #2cbad0;*/
+    /*background: #e9f2fb;*/
 
-    padding-right: 4px;
+    /*padding-right: 4px;*/
 }
 
 .extensionClickableElement{
-    border: solid;
-    border-color: #2cbad0;
-    border-width: 1px;
-    color: #2cbad0;
-    background: #ffffff;
+    /*border: solid;*/
+    /*border-color: #2cbad0;*/
+    /*border-width: 1px;*/
+    color: #3c938c;
+
+    /*background: #e9f2fb;*/
     height: auto;
-    margin-top: -2px;
+    /*margin-top: -2px;*/
     padding-right: 4px;
+    margin-top:20px ;
 }
 
+.optionTitle{
+    font-family: "NarkisBlockMF Medium";
+    font-size: 17px;
+    width: 115px;
+    display: inline-block;
 
+}
 
 
 .popUpFooter{
-    border: solid;
-    border-color: #2cbad0;
-    border-width: 1px;
+    /*border: solid;*/
+    /*border-color: #2cbad0;*/
+    /*border-width: 1px;*/
     height: 80px;
-    margin-top: -1px;
+    /*margin-top: -1px;*/
     padding-right: 4px;
     color: #e73739;
+    /*background: #e9f2fb;*/
 
 }
-/*peoblemStart*/
-
-
-
-
-/*peoblemEnd*/
 
 .linkToMyWords{
-    color: #e73739;
+    color: #3c938c;
     background-color: transparent;
     text-decoration: none;
     position: absolute;
@@ -57,11 +65,11 @@
 }
 .linkToMyWords:hover{
     text-decoration: none;
-    color: #2cbad0;
+    color: #3c938c;
 }
 
 .linkToWebSite{
-    color: #e73739;
+    color: #3c938c;
     background-color: transparent;
     text-decoration: none;
     position: absolute;
@@ -71,26 +79,45 @@
 .linkToWebSite:hover{
     text-decoration: none;
     color: #2cbad0;
+
 }
 
 
 
 .extensionTitle{
-    color: #e73739;
-}
-
-#numberOfWordsInPage{
-    color: #e73739;
+    color: #3c938c;
+    border-bottom: solid #f7c062;
+    /*for moving the line under the title more down*/
+    padding-bottom: 8px;
+    font-family: "Hadassah Friedlaender";
     font-weight: bold;
 }
 
+#numberOfWordsInPage{
+    color: #3c938c;
+    font-weight: bold;
+    font-family: "Hadassah Friedlaender";
+}
+
+#numberOfWordsInTotal{
+    color: #3c938c;
+    font-weight: bold;
+    font-family: "Hadassah Friedlaender";
+}
+
+.latinWordsInPopUp {
+    color: #f7c062;
+}
 
 
 
 
-/*style for extension elements in the current page*/
+
+
+/*style for extension elements (popUp on specific word) in the current page*/
 .latinWords {
-    color: #e73739;
+    color: #ffffff;
+    background-color: #f7c062;
     position: relative;
     display: inline-block;
     cursor: pointer;
@@ -100,35 +127,57 @@
     user-select: none;
 }
 
-
+span.latinWords:hover {
+    cursor: help;
+}
 
 
 .hebrewWords{
-    color: #2cbad0;
+    color: #3c938c;
     margin-right: 10px;
-
 }
 
 .explenation{
     /*color:blue;*/
-    font-family: Narkisim;
-    font-size: 70%;
+    font-family:  Arial;
+    width: 160px;
+    /*for drawin lines in the popUp screen*/
+    /*border-bottom-style: solid;*/
+    /*border-width: 1px;*/
+    /*border-color: #6f8fc5;*/
+    z-index: 1;
 }
+
+/*for drawin lines in the popUp screen*/
+.makeBorderToPopUpHebrewAndLatinWords{
+    /*border-TOP-style: solid;*/
+    /*border-bottom-style: solid;*/
+    /*border-width: 1px;*/
+    width:180px;
+    /*border-color: #6f8fc5;*/
+    display: inline-block;
+    width: 100%;
+
+}
+
 /* The actual popup */
 .latinWords .popuptext {
     direction: rtl;
     visibility: hidden;
-    width: 160px;
-    background-color: white;
+    width: 150px;
+    /*height: 300px;*/
+    /*background-color: red;*/
+
+    /*oramit*/
+    display: block;
+    background-image: url("https://s29.postimg.org/o21xvbrjr/best_Row2.png");
     color: #555;
     text-align: right;
 
-
     border: solid;
-    border-color: #2cbad0;
+    border-color: #e9f2fb;
     /*border-right-width: 3px;*/
     /*border-top-width: 3px;*/
-
     padding: 8px 0;
     position: absolute;
     z-index: 5;
@@ -147,8 +196,9 @@
     margin-left: -5px;
     border-width: 5px;
     border-style: solid;
-    border-color: #2cbad0 transparent transparent transparent;
+    border-color: #e9f2fb transparent transparent transparent;
     z-index:99999;
+
 }
 
 /* Toggle this class - hide and show the popup */
@@ -158,6 +208,11 @@
     -webkit-animation: fadeIn 1s;
     animation: fadeIn 1s;
     z-index:99999;
+
+    /*or*/
+    /*display: block;*/
+    /*background-image: url("row2.png");*/
+
 
 }
 
@@ -170,4 +225,107 @@
 @keyframes fadeIn {
     from {opacity: 0;}
     to {opacity:1 ;}
+}
+
+/*for test page*/
+.test{
+    width: 160px;
+    height: 30px;
+    background: yellow;
+    position: absolute;
+    z-index: 0;
+}
+
+
+/*for swich functionality*/
+.switch {
+    position: relative;
+    display: inline-block;
+    /*width: 60px;*/
+    width: 30px;
+    /*height: 34px;*/
+    height: 17px;
+    top:8px;
+    /*float:left;*/
+    margin-right: 10px;
+}
+
+.switch input {display:none;
+    }
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    -webkit-transition: .4s;
+    transition: .4s;
+
+    /*the color of the slider-  NOT pressed state*/
+    background-color: #f1d6a5;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    /*height: 26px;*/
+    height: 13px;
+    /*width: 26px;*/
+    width: 13px;
+    left: 4px;
+    bottom: 3px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    /*the color of the slider- PRESSED state*/
+    background-color: #f7c062;
+
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #f7c062;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(11px);
+    -ms-transform: translateX(11px);
+    transform: translateX(11px);
+    /*the color of the button in the slider-  pressed state*/
+    background-color: #3c938c;
+}
+
+
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 30px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+    /*the color of the button in the slider- not pressed state*/
+    background-color: #3c938c;
+}
+
+
+/*for test page*/
+.test{
+    width: 400px;
+    height: 400px;
+    /*background: yellow;*/
+    background-image: url("https://s29.postimg.org/d4nxjwalz/row2.png");
+    /*background-repeat: repeat-x;*/
+    position: absolute;
+    z-index: 0;
+
+}
+
+.newFont{
+    font-family: "Hadassah Friedlaender";
 }

@@ -85,13 +85,15 @@ function  switchWords(){
                     var newPage; //the new html after the replace
                     //replacing the latin word in hebrew word- with different style.
                     newPage = myHtml.replace(wordToSearchReg, "<span class='latinWords'>"
-                        +"<span>"+hebrewWord+"</span>"
-                        +"<span class='popuptext' id='myPopup'>"
-                        +"<span class='latinWords'>"+hebrewWord+"</span>"
-                        +"<span class='hebrewWords'>"+wordToSearch+"</span>"
-                        +"<span class='explenation'><br>"+explanation+"</span>"
-                        +"</span>"
-                        +"</span>");
+                                                                        +"<span>"+hebrewWord+"</span>"
+                                                                        +"<span class='popuptext' id='myPopup'>"
+                                                                                +"<span class='makeBorderToPopUpHebrewAndLatinWords'>"
+                                                                                    +"<span class='latinWordsInPopUp'>"+hebrewWord+"</span>"
+                                                                                    +"<span class='hebrewWords'>"+wordToSearch+"</span>"
+                                                                                +"</span>"
+                                                                                +"<span class='explenation'><br>"+explanation+"</span>"
+                                                                        +"</span>"
+                                                            +"</span>");
                     //update the page with the new page
                     document.body.innerHTML = newPage;
                     myHtml = newPage;
@@ -165,7 +167,11 @@ function checkAutoReplaceSettings(){
     chrome.storage.local.get(["enableAutoReplaceWords"], function(items){
         enableAutoReplaceWordsBool = items.enableAutoReplaceWords;
         if(enableAutoReplaceWordsBool == true){
+            console.log("enable oto replace is: TRUE");
             switchWords();
+        }
+        else{
+            console.log("enable oto replace is FALSE. dont replace the words.");
         }
     });
 }
