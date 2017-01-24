@@ -112,7 +112,10 @@ function  switchWords(){
 
 
 function userClickOnWord(hebrewWord,latinWord){
-
+    console.log("hebrewWord");
+    console.log(hebrewWord);
+    console.log("latinWord");
+    console.log(latinWord);
     //updating the statistic of the word
     var statisticArrayLength = userClickStatistic.length;
     var isFind = false;

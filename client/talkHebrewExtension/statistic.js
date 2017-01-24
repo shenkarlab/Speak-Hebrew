@@ -17,40 +17,52 @@ window.onload = function(){
         statisticsArray.forEach(function (wordInStatistic) {
             statisticData.push({
                 y:wordInStatistic.clicked,
-                label:wordInStatistic.latinWord
+                indexLabel:wordInStatistic.latinWord,
+
+                color:"rgba(0, 0, 0, 0)",
+                lineColor:"rgba(0, 0, 0, 0)"
             })
         });
-        CanvasJS.addColorSet("redBars",
-            [//colorSet Array- red color only according to the design
-                "#e73739"
-            ]);
+        console.log(statisticData);
         var chart = new CanvasJS.Chart("chartContainer",
             {
-                colorSet: "redBars",
-                theme: "theme4",
-                title:{
-                    text: "המילים הכי נפוצות"
-                },
+                backgroundColor: "#f8f9fd",
+
                 axisX:{
-                    lineThickness: 0,
-                    labelFontColor: "white",
-                    lineColor: "white",
-                    tickLength: 0
+                    lineThickness:0,
+                    tickThickness:0,
+                    valueFormatString:" "//space
+
                 },
-                axisY:{
-                    lineThickness: 0,
-                    labelFontColor: "white",
-                    lineColor: "white",
-                    tickLength: 0,
-                    display:false
+                axisY2:{
+                    interval: 2,
+                    gridColor:"#2cbad0",
+                    gridThickness: 1,
+                    // lineColor:"#f7be64", //yellow line color
+                    lineColor:"rgba(0, 0, 0, 0)",
+                    margin: 20,
+                    tickLength: 25,
+                    tickColor:"rgba(0, 0, 0, 0"
+                },
+                toolTip:{
+                    backgroundColor: "#EBF2FA"
                 },
                 data: [
                     {
-                        type:"column",
+                        indexLabelPlacement: "outside",
+                        indexLabelBackgroundColor: "#f7be64",
+                        indexLabelFontColor: "#ffffff",
+                        markerSize: 100,
+                        type: "line",
+                        axisYType: "secondary",
+                        // label: "עברית", // need to be dynamic ==> hebWord
+                        toolTipContent: "<div class='toolPopUp'> {y}<span class='wordPopup'>{indexLabel}</span>{name}<span class='wordExplanation'> יחדכיכבידחלג בדגלךכע,ש כגחלכ שךגלקםרמ כלגדק דחגישו</span></div>",
                         dataPoints:statisticData
                     }
+
                 ]
             });
+
         chart.render();
     });
 };

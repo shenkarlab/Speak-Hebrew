@@ -48,11 +48,12 @@ function buildGraph(number,wordToShow,hebWord) {
         graphData.push({
             y:dataFromServer[i][number],
             indexLabel:dataFromServer[i][wordToShow],
-            name:dataFromServer[i][hebWord],
+            name:dataFromServer[i][hebWord], //ask dariya
             color:"rgba(0, 0, 0, 0)",
             lineColor:"rgba(0, 0, 0, 0)"
         });
-    }    var chart = new CanvasJS.Chart("chartContainer",
+    }
+    var chart = new CanvasJS.Chart("chartContainer",
     {
         backgroundColor: "#f8f9fd",
         
