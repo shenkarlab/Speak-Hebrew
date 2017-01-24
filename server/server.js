@@ -11,7 +11,7 @@ app.use(function (req,res,next) {
     res.header("cAccess-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
-
+app.get('/temp',speakHebrewAction.temp);
 app.get('/getUrlHebrewWords',speakHebrewAction.getUrlHebrewWords);
 app.get('/userClickedOnTranslatedWord/:word',speakHebrewAction.userClickedOnTranslatedWord);
 app.get('/getStatisticsTopClickedWords/:numberOfWords',speakHebrewAction.getStatisticsTopClickedWords);
