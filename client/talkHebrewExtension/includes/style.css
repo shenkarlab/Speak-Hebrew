@@ -5,7 +5,7 @@
 
 .mainPopUpSection{
     color:black;
-    padding: 0px;
+    padding: 8px;
     width: 200px;
     margin: 0 auto;
     font-family: Narkisim;
@@ -68,6 +68,7 @@
     position: absolute;
     bottom: 0;
     left: 8px;
+    font-family: "NarkisBlockMF Medium";
 }
 .linkToMyWords:hover{
     text-decoration: none;
@@ -81,10 +82,11 @@
     position: absolute;
     bottom: 0;
     right: 8px;
+    font-family: "NarkisBlockMF Medium";
 }
 .linkToWebSite:hover{
     text-decoration: none;
-    color: #2cbad0;
+    color: #3c938c;
 
 }
 
@@ -103,6 +105,11 @@
     color: #3c938c;
     font-weight: bold;
     font-family: "Hadassah Friedlaender";
+
+}
+.numberOfWordsInPageText{
+    font-family: "NarkisBlockMF Medium";
+    font-size: 120%;
 }
 
 #numberOfWordsInTotal{
