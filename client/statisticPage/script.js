@@ -6,12 +6,16 @@ var dataFromServer = null;
 
 
 function buildGraphClicked(){
+    document.getElementById("gclick").style.backgroundColor = "#EEC166";
+    document.getElementById("gswitch").style.backgroundColor="#FFFFFF";
     var apiCall = "getStatisticsTopSwitchedWords";
     var numberArgumentName  =  "translationCount";
     getData(apiCall,numberArgumentName);
 }
 
 function buildGraphSwitched() {
+    document.getElementById("gswitch").style.backgroundColor="#EEC166";
+    document.getElementById("gclick").style.backgroundColor="#FFFFFF";
     var apiCall = "getStatisticsTopSwitchedWords";
     var numberArgumentName = "clickCount";
     getData(apiCall,numberArgumentName);
@@ -20,6 +24,7 @@ function buildGraphSwitched() {
 function getData(apiCall,numberArgumentName) {
     var wordToShowName = "word";
     var hebrewWordName = "words_translation";
+    var explanationWord = "explanation";
     var myXMLhttpReq=new XMLHttpRequest(),
         method = "GET",
         url= domain+"/"+apiCall+"/"+numberOfWords;
@@ -30,7 +35,7 @@ function getData(apiCall,numberArgumentName) {
                 if(serverResponse.result === "ok"){
                     dataFromServer = serverResponse.data;
                     dataFromServer = dataFromServer.sort(sortJson("translationCount"));
-                    buildGraph(numberArgumentName,wordToShowName,hebrewWordName);
+                    buildGraph(numberArgumentName,wordToShowName,hebrewWordName,explanationWord);
                 }
                 else{ //error in response from the server
                     console.log("Error on response");
@@ -41,17 +46,31 @@ function getData(apiCall,numberArgumentName) {
         myXMLhttpReq.send();
 }
 
-function buildGraph(number,wordToShow,hebWord) {
+function buildGraph(number,wordToShow,hebWord,explanationWord) {
     var graphData = [];
     var lengthOfData = dataFromServer.length;
     for(var i = 0; i < lengthOfData; i++){
-        graphData.push({
+      if(dataFromServer[i][explanationWord] != null){
+          graphData.push({
             y:dataFromServer[i][number],
             indexLabel:dataFromServer[i][wordToShow],
-            name:dataFromServer[i][hebWord], //ask dariya
+            name:dataFromServer[i][hebWord],
+            indexLableExp:dataFromServer[i][explanationWord],
             color:"rgba(0, 0, 0, 0)",
             lineColor:"rgba(0, 0, 0, 0)"
         });
+      }
+      else{
+          graphData.push({
+            y:dataFromServer[i][number],
+            indexLabel:dataFromServer[i][wordToShow],
+            name:dataFromServer[i][hebWord],
+            indexLableExp:"No explanation",
+            color:"rgba(0, 0, 0, 0)",
+            lineColor:"rgba(0, 0, 0, 0)"
+        });
+      }
+
     }
     var chart = new CanvasJS.Chart("chartContainer",
     {
@@ -84,8 +103,7 @@ function buildGraph(number,wordToShow,hebWord) {
        markerSize: 100,
        type: "line",
        axisYType: "secondary",
-       // label: "עברית", // need to be dynamic ==> hebWord
-       toolTipContent: "<div class='toolPopUp'> {y}<span class='wordPopup'>{indexLabel}</span>{name}<span class='wordExplanation'> יחדכיכבידחלג בדגלךכע,ש כגחלכ שךגלקםרמ כלגדק דחגישו</span></div>",
+       toolTipContent: "<div class='toolPopUp'> {y}<span class='wordPopup'>{indexLabel}</span>{name}<span class='wordExplanation'>{indexLableExp}</span></div>",
        dataPoints:graphData
      }
 
@@ -95,7 +113,7 @@ function buildGraph(number,wordToShow,hebWord) {
     chart.render();
   }
 
-buildGraphClicked();
+ buildGraphClicked();
 
 
 function sortJson(prop){

@@ -3,23 +3,50 @@
   padding: 0;
   
 }
-header, footer, main, aside, article, section, nav, span {
+header, footer, main, aside, article, section, nav, span, p {
   display:block;
 }
 
 #logo{
   float: right;
   background-image: url(../images/logo.png);
-  height: 100px;
+  height: 90px;
   background-repeat: no-repeat;
   background-position: 98%;
 }
 
 #logotitel{
-	font-size:90px;
+	font-size:85px;
 	text-align: right;
-	padding-right: 130px;
+	padding-right: 90px;
 	padding-top: 0;
+  padding-left: 10px;
+
+}
+
+.statisticButton{
+  font-size: 30px;
+  padding:5px;
+  margin-top: 40px;
+  margin-right: 10px;
+  float: right;
+}
+
+.staticText{
+  color: #EEC166;
+  float: right;
+  font-size: 30px;
+  margin-right: 10px;
+  margin-top: 50px;
+
+}
+
+.navText{
+  float: left;
+  color: #EEC166;
+  font-size: 30px;
+  margin-left: 30px;
+  margin-top: 50px;
 
 }
 
@@ -48,16 +75,41 @@ header, footer, main, aside, article, section, nav, span {
   white-space: initial;
 }
 
-.statisticButton{
-  font-size: 15px;
-  float: right;
-}
-
 .clear{
   clear: both;
 }
 
-nav{
-  background-color: yellow;
+#wrapper {
+    width: 95%;
+    margin: 0 auto;
 }
 
+nav{
+  height: 100px;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    font-size: 20px;
+    width: 200px;
+    background-color: #E9EFF8;
+    color: #EEC166;
+    text-align: center;
+    border-radius: 6px;
+    padding: 20px;
+    margin-top: 90px;
+    margin-left: 50px;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
