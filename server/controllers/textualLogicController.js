@@ -56,6 +56,7 @@ exports.getTranslatableWords = function(url,dictionary,res,isNewUrl){
                         }
                     }
                         utilitiesController.returnResponse(res,200,true,changedJson);
+                       statisticsController.updateStatistics(url,isNewUrl,changedJson)
                 }
             });
     }
