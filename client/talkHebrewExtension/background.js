@@ -34,7 +34,7 @@ function setClickebleFuncionToAllElements(){
             //show the popUp near the relevant word with translation and explanation
             this.childNodes[1].classList.toggle('show');
             //update word click statistic
-            userClickOnWord(this.childNodes[1].childNodes[0].innerHTML,this.childNodes[1].childNodes[1].innerHTML);
+            userClickOnWord(this.childNodes[1].childNodes[0].childNodes[0].innerHTML,this.childNodes[1].childNodes[0].childNodes[1].innerHTML);
         });
     }
 }
@@ -112,6 +112,7 @@ function  switchWords(){
 
 
 function userClickOnWord(hebrewWord,latinWord){
+
     //updating the statistic of the word
     var statisticArrayLength = userClickStatistic.length;
     var isFind = false;
