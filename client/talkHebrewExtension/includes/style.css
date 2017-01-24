@@ -10,6 +10,13 @@
     margin: 0 auto;
     font-family: Narkisim;
 }
+.mainPopUpSectionForStatistics{
+    color:black;
+    width: 400px;
+    margin: 0 auto;
+
+}
+
 
 .extensionPageBlock{
     margin-top:25px ;
@@ -159,6 +166,7 @@ span.latinWords:hover {
     /*border-width: 1px;*/
     /*border-color: #6f8fc5;*/
     z-index: 1;
+    color: #000000;
 }
 
 /*for drawin lines in the popUp screen*/
@@ -342,3 +350,63 @@ input:checked + .slider:before {
 .newFont{
     font-family: "Hadassah Friedlaender";
 }
+
+
+/*for personal statistic*/
+.toolPopUp{
+    background-color: #EBF2FA;
+    height: auto;
+    width: auto;
+    /*color: #EEC166;*/
+    font-size: 18px;
+    text-align: right;
+    margin: 2px;
+    padding: 0;
+
+}
+
+
+
+
+#logotitel{
+    float: right;
+    margin-right: 40px;
+    height: 26px;
+    font-size:18px;
+    font-family: "NarkisBlockMF Medium";
+    color: #39938b;
+    /*background: yellow;*/
+    /*text-align: right;*/
+    /*padding-right: 10px;*/
+    /*padding-top: 0;*/
+    margin-top: 6px;
+}
+.PersonalStatisticTitle{
+    background-image: url(logoForPersonalStatistic.png);
+    height: 30px;
+    background-repeat: no-repeat;
+    background-position: 98%;
+    margin: 0;
+    padding: 0;
+
+}
+
+.PersonalStatisticOrangeLine a{
+    text-decoration: none;
+    color: #000000;
+    font-size: 18px;
+    font-family: "NarkisBlockMF Medium";
+    margin-top: 36px;
+    margin-left: 16px;
+}
+.PersonalStatisticOrangeLine{
+    background: #f4c16b;
+}
+
+.personalStatisticBody{
+    background: #f8f9fd;
+}
+
+
+
+

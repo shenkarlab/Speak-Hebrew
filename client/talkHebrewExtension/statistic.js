@@ -5,6 +5,7 @@
 var userClickStatistic;
 
 window.onload = function(){
+    console.log("test1");
     chrome.storage.local.get(["userClickStatistic"], function(items){
         if(items.userClickStatistic === undefined){
             userClickStatistic = [];
@@ -12,12 +13,19 @@ window.onload = function(){
         else{
             userClickStatistic = items.userClickStatistic;
         }
-        var statisticsArray =getUserClickStatistic(3);
+        var statisticsArray =getUserClickStatistic(5);
         var statisticData = [];
+        console.log("test2");
+        console.log(statisticsArray);
         statisticsArray.forEach(function (wordInStatistic) {
             statisticData.push({
                 y:wordInStatistic.clicked,
                 indexLabel:wordInStatistic.latinWord,
+                indexLabelHebrewWord:wordInStatistic.hebrewWord,
+                indexLabel3:wordInStatistic.hebrewWord,
+
+
+
 
                 color:"rgba(0, 0, 0, 0)",
                 lineColor:"rgba(0, 0, 0, 0)"
@@ -56,7 +64,10 @@ window.onload = function(){
                         type: "line",
                         axisYType: "secondary",
                         // label: "עברית", // need to be dynamic ==> hebWord
-                        toolTipContent: "<div class='toolPopUp'> {y}<span class='wordPopup'>{indexLabel}</span>{name}<span class='wordExplanation'> יחדכיכבידחלג בדגלךכע,ש כגחלכ שךגלקםרמ כלגדק דחגישו</span></div>",
+                        toolTipContent: "<div class='toolPopUp'><span class='latinWordsInPopUp'>{y}</span> <span class='latinWordsInPopUp'>{indexLabelHebrewWord}</span><span class='hebrewWords'>{indexLabel}</span><br><span class='explenation'>הסבר</span></div>",
+
+
+
                         dataPoints:statisticData
                     }
 
