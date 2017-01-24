@@ -25,6 +25,13 @@ exports.getUrlHebrewWords = function(req,res) {
             }
             else{
                 var isNewUrl = (doc === null);
+                if(isNewUrl){
+                    var urlObject = new urlsSchema(
+                        {
+                            url:url
+                        });
+                    urlObject.save();
+                }
                 var result = textualLogicController.getTranslatableWords(url,dictionary,res,isNewUrl);
             }
         });
