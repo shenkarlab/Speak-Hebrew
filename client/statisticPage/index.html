@@ -5,7 +5,12 @@
  	<script type="text/javascript" src="css/canvasjs.min.js"></script>
  </head> 
  <body>
- 	<nav id="logo"><span id="logotitel">דבר עברית</span></nav>
+     <nav>
+        <div id="logo"><span id="logotitel">דבר עברית</span></div>
+         <button class = "statisticButton" onclick="buildGraphClicked()">הלחיצות ביותר</button>
+         <button class = "statisticButton" onclick="buildGraphSwitched()">המחולפות ביותר</button>
+         <div class="clear"></div>
+     </nav>
     <div id="chartContainer" style="height: 550px; width: 100%;">
     </div>
     <script src= "script.js"></script>
