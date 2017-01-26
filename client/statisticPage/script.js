@@ -86,7 +86,6 @@ function buildGraph(number,wordToShow,hebWord,explanationWord) {
         interval: 2,
         gridColor:"#2cbad0",
         gridThickness: 1,
-        // lineColor:"#f7be64", //yellow line color
         lineColor:"rgba(0, 0, 0, 0)",
         margin: 20,
         tickLength: 25,
@@ -103,7 +102,7 @@ function buildGraph(number,wordToShow,hebWord,explanationWord) {
        markerSize: 100,
        type: "line",
        axisYType: "secondary",
-       toolTipContent: "<div class='toolPopUp'> {y}<span class='wordPopup'>{indexLabel}</span>{name}<span class='wordExplanation'>{indexLableExp}</span></div>",
+       toolTipContent: "<div class='toolPopUp'> {y}<span class='wordPopup'>{indexLabel}</span>{name}<div class='wordExplanation'>{indexLableExp}</div></div>",
        dataPoints:graphData
      }
 
