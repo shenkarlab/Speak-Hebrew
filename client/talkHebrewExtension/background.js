@@ -193,7 +193,7 @@ document.onreadystatechange = function () {
 };
 
 function startMainScript() {
-    if (document.readyState === "complete" && wordsToReplace !== null) {
+    if (document.readyState === "complete" && wordsToReplace !== undefined) {
         console.log("script start:");
         checkAutoReplaceSettings();
         loadStatisticOnStart();
