@@ -89,6 +89,7 @@ header, footer, main, aside, article, section, nav, span, p {
   font-size: 22px;
   text-align: center;
   margin: 10px;
+  font-style: normal;
   
 }
 
