@@ -7,10 +7,32 @@ header, footer, main, aside, article, section, nav, span, p {
   display:block;
 }
 
+@font-face {
+    font-family: Hadassah;
+    src: url(../fonts/HadassahFriedlaender-Bold.otf);
+}
+
+@font-face {
+    font-family: NarkisBlock-Bold;
+    src: url(../fonts/NarkisBlock-Bold.otf);
+}
+
+@font-face {
+
+    font-family: NarkisBlock-Medium;
+    src: url(../fonts/NarkisBlock-Medium.otf);
+}
+
+@font-face {
+
+    font-family: NarkisBlock-Regular;
+    src: url(../fonts/NarkisBlock-Regular.otf);
+}
+
 #logo{
   float: right;
   background-image: url(../images/logo.png);
-  height: 90px;
+  height: 120px;
   background-repeat: no-repeat;
   background-position: 98%;
 }
@@ -19,8 +41,8 @@ header, footer, main, aside, article, section, nav, span, p {
 	font-size:85px;
 	text-align: right;
 	padding-right: 90px;
-	padding-top: 0;
   padding-left: 10px;
+  font-family: "Hadassah";
 
 }
 
@@ -35,6 +57,7 @@ header, footer, main, aside, article, section, nav, span, p {
   margin-top: 45px;
   margin-right: 10px;
   float: right;
+  font-family: 'NarkisBlock-Regular';
 }
 
 .staticText{
@@ -42,7 +65,8 @@ header, footer, main, aside, article, section, nav, span, p {
   float: right;
   font-size: 30px;
   margin-right: 10px;
-  margin-top: 50px;
+  margin-top: 60px;
+  font-family: 'NarkisBlock-Bold';
 
 }
 
@@ -52,11 +76,11 @@ header, footer, main, aside, article, section, nav, span, p {
   font-size: 30px;
   margin-left: 30px;
   margin-top: 50px;
+  font-family: 'NarkisBlock-Bold';
 
 }
 
 .toolPopUp{
-
   background-color: #EBF2FA;
   height: auto;
   width: auto;
@@ -67,12 +91,17 @@ header, footer, main, aside, article, section, nav, span, p {
   
 }
 
+.wordFont{
+  font-family: 'NarkisBlock-Bold';
+  display: inline-block;
+}
 
 .wordPopup{
   color: #5D8688;
   display: inline-block;
   margin-left: 15px;
   margin-right: 15px;
+  font-family: 'NarkisBlock-Medium';
 }
 
 .wordExplanation{
@@ -81,6 +110,7 @@ header, footer, main, aside, article, section, nav, span, p {
   white-space: initial;
   direction: rtl;
   width: 250px;
+  font-family: "NarkisBlock-Medium";
 }
 
 .clear{
@@ -93,7 +123,7 @@ header, footer, main, aside, article, section, nav, span, p {
 }
 
 nav{
-  height: 100px;
+  height: 120px;
 }
 
 .tooltip {
@@ -112,7 +142,7 @@ nav{
     padding: 20px;
     margin-top: 90px;
     margin-left: 50px;
-
+    font-family: 'NarkisBlock-Medium';
     /* Position the tooltip */
     position: absolute;
     z-index: 1;

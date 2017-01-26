@@ -89,20 +89,21 @@ function buildGraph(number,wordToShow,hebWord,explanationWord) {
         lineColor:"rgba(0, 0, 0, 0)",
         margin: 20,
         tickLength: 25,
-        tickColor:"rgba(0, 0, 0, 0"
+        tickColor:"rgba(0, 0, 0, 0)",
+        labelFontColor: "#A1CAC9"
      },
      toolTip:{ 
         backgroundColor: "#EBF2FA"
      },
       data: [
       {
-       indexLabelPlacement: "outside",
        indexLabelBackgroundColor: "#f7be64",
        indexLabelFontColor: "#ffffff",
+       indexLabelFontFamily: 'NarkisBlock-Regular',
        markerSize: 100,
        type: "line",
        axisYType: "secondary",
-       toolTipContent: "<div class='toolPopUp'> {y}<span class='wordPopup'>{indexLabel}</span>{name}<div class='wordExplanation'>{indexLableExp}</div></div>",
+       toolTipContent: "<div class='toolPopUp'> {y}<span class='wordPopup'>{indexLabel}</span><p class='wordFont'>{name}</p><div class='wordExplanation'>{indexLableExp}</div></div>",
        dataPoints:graphData
      }
 
