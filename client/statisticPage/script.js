@@ -16,7 +16,7 @@ function buildGraphClicked(){
 function buildGraphSwitched() {
     document.getElementById("gswitch").style.backgroundColor="#EEC166";
     document.getElementById("gclick").style.backgroundColor="#FFFFFF";
-    var apiCall = "getStatisticsTopSwitchedWords";
+    var apiCall = "getStatisticsTopClickedWords";
     var numberArgumentName = "clickCount";
     getData(apiCall,numberArgumentName);
 }
