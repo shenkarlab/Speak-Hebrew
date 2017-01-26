@@ -39,6 +39,7 @@ header, footer, main, aside, article, section, nav, span, p {
 
 #logotitel{
 	font-size:85px;
+  color: #3A938C;
 	text-align: right;
 	padding-right: 90px;
   padding-left: 10px;
@@ -52,9 +53,9 @@ header, footer, main, aside, article, section, nav, span, p {
 }
 
 .statisticButton{
-  font-size: 30px;
+  font-size: 28px;
   padding:5px;
-  margin-top: 45px;
+  margin-top: 56px;
   margin-right: 10px;
   float: right;
   font-family: 'NarkisBlock-Regular';
@@ -73,9 +74,9 @@ header, footer, main, aside, article, section, nav, span, p {
 .navText{
   float: left;
   color: #EEC166;
-  font-size: 30px;
+  font-size: 28px;
   margin-left: 30px;
-  margin-top: 50px;
+  margin-top: 60px;
   font-family: 'NarkisBlock-Bold';
 
 }
