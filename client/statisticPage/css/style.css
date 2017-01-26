@@ -24,6 +24,11 @@ header, footer, main, aside, article, section, nav, span, p {
 
 }
 
+#chartContainer{
+    height: 550px;
+    width: 100%;
+}
+
 .statisticButton{
   font-size: 30px;
   padding:5px;
