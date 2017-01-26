@@ -126,3 +126,10 @@ function sortJson(prop){
         return 0;
     }
 }
+
+document.onreadystatechange = function () {
+    if (document.readyState === "complete"){
+        document.getElementById("gclick").onclick = buildGraphClicked;
+        document.getElementById("gswitch").onclick = buildGraphSwitched;
+    }
+};
