@@ -34,7 +34,7 @@ function getData(apiCall,numberArgumentName) {
                 serverResponse = JSON.parse(myXMLhttpReq.responseText);
                 if(serverResponse.result === "ok"){
                     dataFromServer = serverResponse.data;
-                    dataFromServer = dataFromServer.sort(sortJson("translationCount"));
+                    dataFromServer = dataFromServer.sort(sortJson(numberArgumentName));
                     buildGraph(numberArgumentName,wordToShowName,hebrewWordName,explanationWord);
                 }
                 else{ //error in response from the server
