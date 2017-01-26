@@ -23,6 +23,7 @@ window.onload = function(){
                 indexLabel:wordInStatistic.latinWord,
                 indexLabelHebrewWord:wordInStatistic.hebrewWord,
                 indexLabel3:wordInStatistic.hebrewWord,
+                indexLabel4Explenation:wordInStatistic.explenation,
 
 
 
@@ -64,7 +65,7 @@ window.onload = function(){
                         type: "line",
                         axisYType: "secondary",
                         // label: "עברית", // need to be dynamic ==> hebWord
-                        toolTipContent: "<div class='toolPopUp'><span class='latinWordsInPopUp'>{y}</span> <span class='latinWordsInPopUp'>{indexLabelHebrewWord}</span><span class='hebrewWords'>{indexLabel}</span><br><span class='explenation'>הסבר</span></div>",
+                        toolTipContent: "<section class='toolPopUp'><span class='latinWordsInPopUp'>{y}</span> <span class='latinWordsInPopUp'>{indexLabelHebrewWord}</span><span class='hebrewWords'>{indexLabel}</span><br><section class='explenation'>{indexLabel4Explenation}</section></section>",
 
 
 

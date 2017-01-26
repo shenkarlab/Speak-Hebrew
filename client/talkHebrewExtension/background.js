@@ -12,7 +12,6 @@ var apiCall = "getUrlHebrewWords?url=";
 /*the main function that switch the latin word in the html page to the relevant hebrew word*/
 getSwitchWords();
 function  getSwitchWords(){
-    var myHtml=document.body.innerHTML; //get the current html
     var serverResponse;
     //sanding request to the server in order to bring the relevant words list that fit the current page.
     var myXMLhttpReq=new XMLHttpRequest(),
@@ -58,14 +57,26 @@ function updateNumberOfWordsThatAutoReplace(numOfWords){
 /*making the current replacements words clickable, and define the relevant function*/
 function setClickebleFuncionToAllElements(){
     var latinWordsArray = document.getElementsByClassName('latinWords');
+    //var latinWordsArray = document.getElementsByClassName('hebWord');
     var latinWordsAmount = latinWordsArray.length;
     //adding event listener "click" to all the words-  to show popUp when user clicks on a word.
     for(var i=0;i<latinWordsAmount;i++){
         latinWordsArray[i].addEventListener('click', function(){
+
             //show the popUp near the relevant word with translation and explanation
             this.childNodes[1].classList.toggle('show');
+
+
             //update word click statistic
-            userClickOnWord(this.childNodes[1].childNodes[0].childNodes[0].innerHTML,this.childNodes[1].childNodes[0].childNodes[1].innerHTML);
+            var hebrew=this.childNodes[1].childNodes[0].childNodes[0].innerHTML;
+            var latin=this.childNodes[1].childNodes[0].childNodes[1].innerHTML;
+
+            var explenation=this.childNodes[1].childNodes[1].childNodes[1].innerHTML;
+            //console.log("hebrew issssss;"+hebrew+"latin isss:"+latin);
+            //console.log("------------------------")
+            //console.log("exple issss: "+explenation);
+            //console.log("------------------------")
+            userClickOnWord(hebrew,latin,explenation);
         });
     }
 }
@@ -100,13 +111,13 @@ function  switchWords(){
                     var newPage; //the new html after the replace
                     //replacing the latin word in hebrew word- with different style.
                     newPage = myHtml.replace(wordToSearchReg, "<span class='latinWords'>"
-                                                                        +"<span>"+hebrewWord+"</span>"
+                                                                        +"<span class='hebWord'>"+hebrewWord+"</span>"
                                                                         +"<span class='popuptext' id='myPopup'>"
                                                                                 +"<span class='makeBorderToPopUpHebrewAndLatinWords'>"
                                                                                     +"<span class='latinWordsInPopUp'>"+hebrewWord+"</span>"
                                                                                     +"<span class='hebrewWords'>"+wordToSearch+"</span>"
                                                                                 +"</span>"
-                                                                                +"<span class='explenation'><br>"+explanation+"</span>"
+                                                                                +"<span class='explenation'><span><br></span><span>"+explanation+"</span></span>"
                                                                         +"</span>"
                                                             +"</span>");
                     //update the page with the new page
@@ -119,11 +130,14 @@ function  switchWords(){
 }
 
 
-function userClickOnWord(hebrewWord,latinWord){
+function userClickOnWord(hebrewWord,latinWord,explenation){
     console.log("hebrewWord");
     console.log(hebrewWord);
     console.log("latinWord");
     console.log(latinWord);
+    console.log("explenation");
+    console.log(explenation);
+
     //updating the statistic of the word
     var statisticArrayLength = userClickStatistic.length;
     var isFind = false;
@@ -139,6 +153,7 @@ function userClickOnWord(hebrewWord,latinWord){
         userClickStatistic.push({
             latinWord:latinWord,
             hebrewWord:hebrewWord,
+            explenation:explenation,
             clicked:1
         });
     }
@@ -147,6 +162,8 @@ function userClickOnWord(hebrewWord,latinWord){
 }
 
 function updateGlobalClickStatistic(word) {
+    console.log("updateGlobalClickStatistic, word is:");
+    console.log(word);
     var myXMLhttpReq = new XMLHttpRequest(),
         method = "GET",
         url = "https://speak-hebrew-lab-project.herokuapp.com/userClickedOnTranslatedWord/"+word;
