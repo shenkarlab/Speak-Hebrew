@@ -379,7 +379,7 @@ input:checked + .slider:before {
 
 
 
-#logotitel{
+.logotitel{
     float: right;
     margin-right: 40px;
     height: 26px;
@@ -393,7 +393,7 @@ input:checked + .slider:before {
     margin-top: 6px;
 }
 .PersonalStatisticTitle{
-    background-image: url(logoForPersonalStatistic.png);
+    background-image: url(../images/logoForPersonalStatistic.png);
     height: 30px;
     background-repeat: no-repeat;
     background-position: 98%;
