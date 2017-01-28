@@ -1,9 +1,7 @@
-var margin,width,height,xScale,yScale,xAxis,yAxis,svgContainer,xAxis_g;
+var width,height;
 var numberOfWords = 15;
-//var apiCall = "getStatisticsTopSwitchedWords";
 var domain = "https://speak-hebrew-lab-project.herokuapp.com";
 var dataFromServer = null;
-
 
 function buildGraphClicked(){
     document.getElementById("gclick").style.backgroundColor = "#EEC166";
@@ -54,7 +52,7 @@ function buildGraph(number,wordToShow,hebWord,explanationWord) {
         if(maxNumber < dataFromServer[i][number]){
             maxNumber =  dataFromServer[i][number];
         }
-      if(dataFromServer[i][explanationWord] != null){
+        if(dataFromServer[i][explanationWord] != null){
           graphData.push({
             y:dataFromServer[i][number],
             indexLabel:dataFromServer[i][wordToShow],
@@ -62,8 +60,8 @@ function buildGraph(number,wordToShow,hebWord,explanationWord) {
             indexLableExp:dataFromServer[i][explanationWord],
             color:"rgba(0, 0, 0, 0)",
             lineColor:"rgba(0, 0, 0, 0)"
-        });
-      }
+          });
+        }
       else{
           graphData.push({
             y:dataFromServer[i][number],
@@ -74,19 +72,15 @@ function buildGraph(number,wordToShow,hebWord,explanationWord) {
             lineColor:"rgba(0, 0, 0, 0)"
         });
       }
-
     }
-    console.log(maxNumber);
 
     var chart = new CanvasJS.Chart("chartContainer",
     {
         backgroundColor: "#f8f9fd",
-        
         axisX:{
         lineThickness:0,
         tickThickness:0,
         valueFormatString:" "//space
-
       },
         axisY2:{
         interval: Math.floor(maxNumber/10),
@@ -112,15 +106,12 @@ function buildGraph(number,wordToShow,hebWord,explanationWord) {
        toolTipContent: "<div class='toolPopUp'> {y}<span class='wordPopup'>{indexLabel}</span><p class='wordFont'>{name}</p><div class='wordExplanation'>{indexLableExp}</div></div>",
        dataPoints:graphData
      }
-
      ]
  });
-
     chart.render();
-  }
+}
 
- buildGraphClicked();
-
+buildGraphClicked();
 
 function sortJson(prop){
     return function(objectA,objectB){

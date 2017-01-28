@@ -5,7 +5,6 @@
 var userClickStatistic;
 
 window.onload = function(){
-    console.log("test1");
     chrome.storage.local.get(["userClickStatistic"], function(items){
         if(items.userClickStatistic === undefined){
             userClickStatistic = [];
@@ -15,8 +14,6 @@ window.onload = function(){
         }
         var statisticsArray =getUserClickStatistic(5);
         var statisticData = [];
-        console.log("test2");
-        console.log(statisticsArray);
         statisticsArray.forEach(function (wordInStatistic) {
             statisticData.push({
                 y:wordInStatistic.clicked,
@@ -24,10 +21,6 @@ window.onload = function(){
                 indexLabelHebrewWord:wordInStatistic.hebrewWord,
                 indexLabel3:wordInStatistic.hebrewWord,
                 indexLabel4Explenation:wordInStatistic.explenation,
-
-
-
-
                 color:"rgba(0, 0, 0, 0)",
                 lineColor:"rgba(0, 0, 0, 0)"
             })
@@ -36,7 +29,6 @@ window.onload = function(){
         var chart = new CanvasJS.Chart("chartContainer",
             {
                 backgroundColor: "#f8f9fd",
-
                 axisX:{
                     lineThickness:0,
                     tickThickness:0,
@@ -47,7 +39,6 @@ window.onload = function(){
                     interval: 2,
                     gridColor:"#2cbad0",
                     gridThickness: 1,
-                    // lineColor:"#f7be64", //yellow line color
                     lineColor:"rgba(0, 0, 0, 0)",
                     margin: 20,
                     tickLength: 25,
@@ -64,17 +55,11 @@ window.onload = function(){
                         markerSize: 100,
                         type: "line",
                         axisYType: "secondary",
-                        // label: "עברית", // need to be dynamic ==> hebWord
                         toolTipContent: "<section class='toolPopUp'><span class='latinWordsInPopUp'>{y}</span> <span class='latinWordsInPopUp'>{indexLabelHebrewWord}</span><span class='hebrewWords'>{indexLabel}</span><br><section class='explenation'>{indexLabel4Explenation}</section></section>",
-
-
-
                         dataPoints:statisticData
                     }
-
                 ]
             });
-
         chart.render();
     });
 };
