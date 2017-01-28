@@ -49,7 +49,11 @@ function getData(apiCall,numberArgumentName) {
 function buildGraph(number,wordToShow,hebWord,explanationWord) {
     var graphData = [];
     var lengthOfData = dataFromServer.length;
+    var maxNumber = 0;
     for(var i = 0; i < lengthOfData; i++){
+        if(maxNumber < dataFromServer[i][number]){
+            maxNumber =  dataFromServer[i][number];
+        }
       if(dataFromServer[i][explanationWord] != null){
           graphData.push({
             y:dataFromServer[i][number],
@@ -72,6 +76,8 @@ function buildGraph(number,wordToShow,hebWord,explanationWord) {
       }
 
     }
+    console.log(maxNumber);
+
     var chart = new CanvasJS.Chart("chartContainer",
     {
         backgroundColor: "#f8f9fd",
@@ -83,7 +89,7 @@ function buildGraph(number,wordToShow,hebWord,explanationWord) {
 
       },
         axisY2:{
-        interval: 2,
+        interval: Math.floor(maxNumber/10),
         gridColor:"#2cbad0",
         gridThickness: 1,
         lineColor:"rgba(0, 0, 0, 0)",

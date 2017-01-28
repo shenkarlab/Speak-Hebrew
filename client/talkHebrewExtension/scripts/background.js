@@ -126,7 +126,6 @@ function  switchWords(){
                 }
                 //Passing on any of the words in order that they will be clickable.
                 setClickebleFuncionToAllElements();
-    
 }
 
 
@@ -137,28 +136,34 @@ function userClickOnWord(hebrewWord,latinWord,explenation){
     console.log(latinWord);
     console.log("explenation");
     console.log(explenation);
-
-    //updating the statistic of the word
-    var statisticArrayLength = userClickStatistic.length;
-    var isFind = false;
-    for(var i = 0;i < statisticArrayLength; i++){
-        if(userClickStatistic[i].latinWord === latinWord){
-            if(userClickStatistic[i].hebrewWord === hebrewWord){
-                isFind = true;
-                userClickStatistic[i].clicked++;
+    if(!containNotHebrewChar(hebrewWord) && !containNotHebrewChar(latinWord)){
+        var statisticArrayLength = userClickStatistic.length;
+        var isFind = false;
+        for(var i = 0;i < statisticArrayLength; i++){
+            if(userClickStatistic[i].latinWord === latinWord){
+                if(userClickStatistic[i].hebrewWord === hebrewWord){
+                    isFind = true;
+                    userClickStatistic[i].clicked++;
+                }
             }
         }
+        if(!isFind){
+            userClickStatistic.push({
+                latinWord:latinWord,
+                hebrewWord:hebrewWord,
+                explenation:explenation,
+                clicked:1
+            });
+        }
+        chrome.storage.local.set({ "userClickStatistic": userClickStatistic }, function(){});
+        updateGlobalClickStatistic(latinWord);
+        console.log("Add to statistic done");
     }
-    if(!isFind){
-        userClickStatistic.push({
-            latinWord:latinWord,
-            hebrewWord:hebrewWord,
-            explenation:explenation,
-            clicked:1
-        });
+    else{
+        console.log("Add to statistic fail");
     }
-    chrome.storage.local.set({ "userClickStatistic": userClickStatistic }, function(){});
-    updateGlobalClickStatistic(latinWord);
+    //updating the statistic of the word
+
 }
 
 function updateGlobalClickStatistic(word) {
@@ -203,6 +208,20 @@ function checkAutoReplaceSettings(){
             console.log("enable oto replace is FALSE. dont replace the words.");
         }
     });
+}
+
+function containNotHebrewChar(word) {
+        var result = false;
+        var wordLength = word.length;
+        for(var i = 0; i < wordLength ; i++){
+            if (!(word.charCodeAt(i) >= 0x590 && word.charCodeAt(i) <= 0x5FF)){
+                if(word[i]!== " "){
+                    result = true;
+                    break;
+                }
+            }
+        }
+        return result;
 }
 
 document.onreadystatechange = function () {
