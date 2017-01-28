@@ -10,24 +10,29 @@ var textualLogicController = require('./textualLogicController');
 var utilitiesController = require('./utilitiesController');
 var statisticsController = require('./statisticsController');
 
-var dictionary;
+var dictionary = undefined;
 
 exports.getUrlHebrewWords = function(req,res) {
-        var userId = req.params.userId;
-        var url = req.query.url;
-        var query = urlsSchema.findOne().where({
-            url:url
-        });
-        query.exec(function (err,doc) {
-            if(err) {
-                console.error(err);
-                utilitiesController.returnResponse(res,500,false,responseMessage.dbError)
-            }
-            else{
-                var isNewUrl = (doc === null);
-                var result = textualLogicController.getTranslatableWords(url,dictionary,res,isNewUrl);
-            }
-        });
+        if(dictionary === undefined){
+            utilitiesController.returnResponse(res,503,false,responseMessage.serverNotReady);
+        }
+        else{
+            var userId = req.params.userId;
+            var url = req.query.url;
+            var query = urlsSchema.findOne().where({
+                url:url
+            });
+            query.exec(function (err,doc) {
+                if(err) {
+                    console.error(err);
+                    utilitiesController.returnResponse(res,500,false,responseMessage.dbError)
+                }
+                else{
+                    var isNewUrl = (doc === null);
+                    var result = textualLogicController.getTranslatableWords(url,dictionary,res,isNewUrl);
+                }
+            });
+        }
 };
 
 exports.userClickedOnTranslatedWord = function(req,res) {

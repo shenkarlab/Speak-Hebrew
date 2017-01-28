@@ -2,5 +2,6 @@
   "serverError" : "SERVER_ERROR",
   "illegalArgument":"ILLEGAL_ARGUMENT",
   "dbError" : "DB_ERROR",
-  "statisticSaved":"STATISTICS_SAVED"
+  "statisticSaved":"STATISTICS_SAVED",
+  "serverNotReady":"SERVER_NOT_READY"
 }
