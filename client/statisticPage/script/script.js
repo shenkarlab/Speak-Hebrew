@@ -6,16 +6,16 @@ var dataFromServer = null;
 function buildGraphClicked(){
     document.getElementById("gclick").style.backgroundColor = "#EEC166";
     document.getElementById("gswitch").style.backgroundColor="#FFFFFF";
-    var apiCall = "getStatisticsTopSwitchedWords";
-    var numberArgumentName  =  "translationCount";
+    var apiCall = "getStatisticsTopClickedWords";
+    var numberArgumentName = "clickCount";
     getData(apiCall,numberArgumentName);
 }
 
 function buildGraphSwitched() {
     document.getElementById("gswitch").style.backgroundColor="#EEC166";
     document.getElementById("gclick").style.backgroundColor="#FFFFFF";
-    var apiCall = "getStatisticsTopClickedWords";
-    var numberArgumentName = "clickCount";
+    var apiCall = "getStatisticsTopSwitchedWords";
+    var numberArgumentName  =  "translationCount";
     getData(apiCall,numberArgumentName);
 }
 
@@ -111,8 +111,6 @@ function buildGraph(number,wordToShow,hebWord,explanationWord) {
     chart.render();
 }
 
-buildGraphClicked();
-
 function sortJson(prop){
     return function(objectA,objectB){
         if( objectA[prop] > objectB[prop]){
@@ -130,3 +128,5 @@ document.onreadystatechange = function () {
         document.getElementById("gswitch").onclick = buildGraphSwitched;
     }
 };
+
+buildGraphClicked();

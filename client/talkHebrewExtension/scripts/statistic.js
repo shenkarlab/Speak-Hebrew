@@ -14,7 +14,11 @@ window.onload = function(){
         }
         var statisticsArray =getUserClickStatistic(5);
         var statisticData = [];
+        var maxNumber = 0;
         statisticsArray.forEach(function (wordInStatistic) {
+            if(maxNumber < wordInStatistic.clicked){
+                maxNumber =  wordInStatistic.clicked;
+            }
             statisticData.push({
                 y:wordInStatistic.clicked,
                 indexLabel:wordInStatistic.latinWord,
@@ -36,7 +40,7 @@ window.onload = function(){
 
                 },
                 axisY2:{
-                    interval: 2,
+                    interval: Math.floor(maxNumber/10),
                     gridColor:"#2cbad0",
                     gridThickness: 1,
                     lineColor:"rgba(0, 0, 0, 0)",
