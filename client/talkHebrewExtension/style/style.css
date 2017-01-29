@@ -10,13 +10,13 @@
     margin: 0 auto;
     font-family: Narkisim;
 }
+
 .mainPopUpSectionForStatistics{
     color:black;
     width: 400px;
     margin: 0 auto;
 
 }
-
 
 .extensionPageBlock{
     margin-top:25px ;
@@ -29,22 +29,14 @@
 }
 
 .extensionClickableElement{
-    /*border: solid;*/
-    /*border-color: #2cbad0;*/
-    /*border-width: 1px;*/
     color: #3c938c;
-
-    /*background: #e9f2fb;*/
     height: auto;
-    /*margin-top: -2px;*/
     padding-right: 4px;
     margin-top:20px ;
 }
 
 .nomOfWordsTitle{
-    /*font-size: 20px;*/
     font-family: "NarkisBlockMF Medium";
-
 }
 
 .optionTitle{
@@ -52,20 +44,12 @@
     font-size: 17px;
     width: 115px;
     display: inline-block;
-
 }
 
-
 .popUpFooter{
-    /*border: solid;*/
-    /*border-color: #2cbad0;*/
-    /*border-width: 1px;*/
     height: 80px;
-    /*margin-top: -1px;*/
     padding-right: 4px;
     color: #e73739;
-    /*background: #e9f2fb;*/
-
 }
 
 .linkToMyWords{
@@ -77,6 +61,7 @@
     left: 8px;
     font-family: "NarkisBlockMF Medium";
 }
+
 .linkToMyWords:hover{
     text-decoration: none;
     color: #3c938c;
@@ -91,13 +76,12 @@
     right: 8px;
     font-family: "NarkisBlockMF Medium";
 }
+
 .linkToWebSite:hover{
     text-decoration: none;
     color: #3c938c;
 
 }
-
-
 
 .extensionTitle{
     color: #3c938c;
@@ -114,6 +98,7 @@
     font-family: "Hadassah Friedlaender";
 
 }
+
 .numberOfWordsInPageText{
     font-family: "NarkisBlockMF Medium";
     font-size: 120%;
@@ -129,11 +114,6 @@
     color: #f7c062;
     font-family: "NarkisBlockMF Medium";
 }
-
-
-
-
-
 
 /*style for extension elements (popUp on specific word) in the current page*/
 .latinWords {
@@ -152,7 +132,6 @@ span.latinWords:hover {
     cursor: help;
 }
 
-
 .hebrewWords{
     color: #3c938c;
     margin-right: 10px;
@@ -163,32 +142,17 @@ span.latinWords:hover {
     white-space: initial;
     direction: rtl;
     margin-top: 6px;
-    /*color:blue;*/
     font-family: "NarkisBlockMF Medium";
     width: 200px;
-    /*height: auto;*/
-    /*for drawin lines in the popUp screen*/
-    /*border-bottom-style: solid;*/
-    /*border-width: 1px;*/
-    /*border-color: #6f8fc5;*/
-    /*z-index: 1;*/
     color: #000000;
     font-size: 80%;
-    /*display: block;*/
-    /*white-space: inherit;*/
-
 }
 
 /*for drawin lines in the popUp screen*/
 .makeBorderToPopUpHebrewAndLatinWords{
-    /*border-TOP-style: solid;*/
-    /*border-bottom-style: solid;*/
-    /*border-width: 1px;*/
     width:180px;
-    /*border-color: #6f8fc5;*/
     display: inline-block;
     width: 100%;
-
 }
 
 /* The actual popup */
@@ -196,19 +160,12 @@ span.latinWords:hover {
     direction: rtl;
     visibility: hidden;
     width: 150px;
-    /*height: 300px;*/
-    /*background-color: red;*/
-
-    /*oramit*/
     display: block;
     background-image: url("https://s29.postimg.org/o21xvbrjr/best_Row2.png");
     color: #555;
     text-align: right;
-
     border: solid;
     border-color: #e9f2fb;
-    /*border-right-width: 3px;*/
-    /*border-top-width: 3px;*/
     padding: 8px 0;
     position: absolute;
     z-index: 5;
@@ -229,22 +186,14 @@ span.latinWords:hover {
     border-style: solid;
     border-color: #e9f2fb transparent transparent transparent;
     z-index:99999;
-
 }
 
 /* Toggle this class - hide and show the popup */
 .latinWords .show {
-
     visibility: visible;
     -webkit-animation: fadeIn 1s;
     animation: fadeIn 1s;
     z-index:99999;
-
-    /*or*/
-    /*display: block;*/
-    /*background-image: url("row2.png");*/
-
-
 }
 
 /* Add animation (fade in the popup) */
@@ -258,26 +207,13 @@ span.latinWords:hover {
     to {opacity:1 ;}
 }
 
-/*for test page*/
-.test{
-    width: 160px;
-    height: 30px;
-    background: yellow;
-    position: absolute;
-    z-index: 0;
-}
-
-
 /*for swich functionality*/
 .switch {
     position: relative;
     display: inline-block;
-    /*width: 60px;*/
     width: 30px;
-    /*height: 34px;*/
     height: 17px;
     top:8px;
-    /*float:left;*/
     margin-right: 10px;
 }
 
@@ -291,10 +227,8 @@ span.latinWords:hover {
     left: 0;
     right: 0;
     bottom: 0;
-
     -webkit-transition: .4s;
     transition: .4s;
-
     /*the color of the slider-  NOT pressed state*/
     background-color: #f1d6a5;
 }
@@ -302,9 +236,7 @@ span.latinWords:hover {
 .slider:before {
     position: absolute;
     content: "";
-    /*height: 26px;*/
     height: 13px;
-    /*width: 26px;*/
     width: 13px;
     left: 4px;
     bottom: 3px;
@@ -331,8 +263,6 @@ input:checked + .slider:before {
     background-color: #3c938c;
 }
 
-
-
 /* Rounded sliders */
 .slider.round {
     border-radius: 30px;
@@ -344,23 +274,9 @@ input:checked + .slider:before {
     background-color: #3c938c;
 }
 
-
-/*for test page*/
-.test{
-    width: 400px;
-    height: 400px;
-    /*background: yellow;*/
-    background-image: url("https://s29.postimg.org/d4nxjwalz/row2.png");
-    /*background-repeat: repeat-x;*/
-    position: absolute;
-    z-index: 0;
-
-}
-
 .newFont{
     font-family: "Hadassah Friedlaender";
 }
-
 
 /*for personal statistic*/
 .toolPopUp{
@@ -373,11 +289,7 @@ input:checked + .slider:before {
     margin: 2px;
     padding: 0;
     font-style: normal;
-
 }
-
-
-
 
 .logotitel{
     float: right;
@@ -392,6 +304,7 @@ input:checked + .slider:before {
     /*padding-top: 0;*/
     margin-top: 6px;
 }
+
 .PersonalStatisticTitle{
     background-image: url(../images/logoForPersonalStatistic.png);
     height: 30px;
@@ -407,9 +320,11 @@ input:checked + .slider:before {
     color: #000000;
     font-size: 18px;
     font-family: "NarkisBlockMF Medium";
-    margin-top: 36px;
+    margin-top: 6px;
     margin-left: 16px;
+    display: inline-block;
 }
+
 .PersonalStatisticOrangeLine{
     background: #f4c16b;
 }
