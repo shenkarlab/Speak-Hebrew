@@ -5,7 +5,7 @@ var port = process.env.PORT || 3000;
 var speakHebrewAction = require('./controllers/speakHebrewActionsController');
 
 app.set('port',port);
-app.use('/',express.static('./public'));
+app.use('/',express.static('./client/statisticPage'));
 app.use(function (req,res,next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("cAccess-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
